@@ -1,5 +1,9 @@
 pkgsR  =  c('plyr',
             'tidyr',
+            'caret',
+            'e1071',
+            'sampling',
+            'doSNOW',
             'dplyr')
 for (pkgR in pkgsR){
   if (!pkgR %in% rownames(installed.packages())) {

@@ -194,7 +194,9 @@ createDescribeTrainingCGC = function( input.file=NULL, output.dir=NULL, exclude.
 
 
 ## Run novelty detection
-runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100, kernels=c("linear", "polynomial", "radial", "sigmoid")){
+runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
+                               kernels=c("linear", "polynomial", "radial", "sigmoid"),
+                               cores=2){
 
   ## Constants
   NU = seq(0.05, 0.9, 0.05)
@@ -245,132 +247,142 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100, kernels=c("line
   load(paste(output.dir, "/training_set.Rdata", sep = ""))
   pgenes <- training %>% add_rownames %>% separate(rowname, into=c("sample", "entrez"), sep="\\.") %>% subset(type=="C") %>% select(entrez) %>% unique %>% .$entrez
 
-  cv_stats = NULL
+  cv_stats_full = NULL
   for(k in kernels){
     cat(k, "\n")
     if(k=="linear"){
       total = length(NU)
+
+      cl <- makeCluster(cores)
+      registerDoSNOW(cl)
       # create progress bar
-      pb <- txtProgressBar(min = 0, max = total, style = 3)
-      for(i in 1:total){
-        Sys.sleep(0.1)
-        mynu=NU[i]
-        mygamma=0
-        mydegree=0
+      pb <- txtProgressBar(max = total, style = 3)
+      progress <- function(n) setTxtProgressBar(pb, n)
+      opts <- list(progress = progress)
+      result <- foreach(i = 1:total, .combine = rbind, .packages=c('caret', 'sampling', 'e1071', 'tidyr', 'dplyr'),
+                        .options.snow = opts) %dopar%
+                        {
 
-        for(y in 1:iters){
-          iteration_dir <- create.output.folder(output.dir, k, mynu, mygamma, mydegree, y)
+                            Sys.sleep(0.1)
+                            mynu=NU[i]
+                            mygamma=0
+                            mydegree=0
 
-          traingenes = sample(pgenes,ceiling(((CV-LO)/CV)*length(pgenes)))
-          testgenes = pgenes[!(pgenes%in%traingenes)]
+                            for(y in 1:iters){
+                              iteration_dir <- create.output.folder(output.dir, k, mynu, mygamma, mydegree, y)
 
-          ## Extract trainset and testset
-          trainset <- training %>% tibble::rownames_to_column() %>% separate(rowname, into=c("sample", "entrez"), sep="\\.") %>% subset(entrez %in% traingenes)
-          testset <-training %>% tibble::rownames_to_column() %>% separate(rowname, into=c("sample", "entrez"), sep="\\.") %>% subset(entrez %in% testgenes)
+                              traingenes = sample(pgenes,ceiling(((CV-LO)/CV)*length(pgenes)))
+                              testgenes = pgenes[!(pgenes%in%traingenes)]
 
-          ## Make Cancer_type, Sample and Entrez row names
-          trainset <- trainset %>% mutate(key=paste(sample, entrez, sep=".")) %>%
-            select(-sample, -entrez)
-          rnames <- trainset$key
-          trainset <- trainset %>% select(-key) %>% data.frame()
-          row.names(trainset) <- rnames
+                              ## Extract trainset and testset
+                              trainset <- training %>% tibble::rownames_to_column() %>% separate(rowname, into=c("sample", "entrez"), sep="\\.") %>% subset(entrez %in% traingenes)
+                              testset <-training %>% tibble::rownames_to_column() %>% separate(rowname, into=c("sample", "entrez"), sep="\\.") %>% subset(entrez %in% testgenes)
 
-          testset <- testset %>% mutate(key=paste(sample, entrez, sep=".")) %>%
-            select(-sample, -entrez)
-          rnames <- testset$key
-          testset <- testset %>% select(-key) %>% data.frame()
-          row.names(testset) <- rnames
+                              ## Make Cancer_type, Sample and Entrez row names
+                              trainset <- trainset %>% mutate(key=paste(sample, entrez, sep=".")) %>%
+                                select(-sample, -entrez)
+                              rnames <- trainset$key
+                              trainset <- trainset %>% select(-key) %>% data.frame()
+                              row.names(trainset) <- rnames
 
-          ## Exclude columns that are NaN - this may be changed in later versions to make the column all 0s
-          trainset=Filter(function(x)!all(is.nan(x)), trainset)
-          testset=Filter(function(x)!all(is.nan(x)), testset)
+                              testset <- testset %>% mutate(key=paste(sample, entrez, sep=".")) %>%
+                                select(-sample, -entrez)
+                              rnames <- testset$key
+                              testset <- testset %>% select(-key) %>% data.frame()
+                              row.names(testset) <- rnames
 
-          ## Store the train and testset
-          save(trainset, file=paste(iteration_dir, "/trainset.Rdata", sep=""))
-          save(testset, file=paste(iteration_dir, "/testset.Rdata", sep=""))
+                              ## Exclude columns that are NaN - this may be changed in later versions to make the column all 0s
+                              trainset=Filter(function(x)!all(is.nan(x)), trainset)
+                              testset=Filter(function(x)!all(is.nan(x)), testset)
 
-          ## -----------------------------------------------------
-          ##                  SVM
-          ## -----------------------------------------------------
+                              ## Store the train and testset
+                              save(trainset, file=paste(iteration_dir, "/trainset.Rdata", sep=""))
+                              save(testset, file=paste(iteration_dir, "/testset.Rdata", sep=""))
 
-          svm.model <- svm(type ~ ., data = trainset, kernel=k, type="one-classification", scale=FALSE, nu=mynu)
-          save(svm.model, file=paste(iteration_dir, "/svmModel.Rdata", sep=""))
+                              ## -----------------------------------------------------
+                              ##                  SVM
+                              ## -----------------------------------------------------
 
-          prediction <- predict(svm.model, testset%>%select(-type), decision.values = TRUE, probability = TRUE)
-          ## save prediction in a file
-          save(prediction, file=paste(iteration_dir, "/prediction.Rdata", sep=""))
+                              svm.model <- svm(type ~ ., data = trainset, kernel=k, type="one-classification", scale=FALSE, nu=mynu)
+                              save(svm.model, file=paste(iteration_dir, "/svmModel.Rdata", sep=""))
 
-          ## Get the performance
-          noTrain = trainset %>% nrow
-          cv_analysis = tail(unlist(strsplit(iteration_dir, "\\/")), n=1)
-          ## ---------------------- Test set -------------------------------------
-          ## Concatenate the predictions to the true values
-          testset$prediction = prediction
-          testset = testset %>% select(type, prediction)
-          testset = testset %>% mutate(p=ifelse(prediction==TRUE, "C", "N"))
-          testset$type = factor(as.character(testset$type), levels = c("C", "N"))
-          testset$p = factor(as.character(testset$p), levels = c("C", "N"))
+                              prediction <- predict(svm.model, testset%>%select(-type), decision.values = TRUE, probability = TRUE)
+                              ## save prediction in a file
+                              save(prediction, file=paste(iteration_dir, "/prediction.Rdata", sep=""))
 
-          ## Performance metrics
-          ## Confusion matrix
-          cM <- confusionMatrix(testset$p,testset$type, positive = c("C"))
-          cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
-                                                 nu=mynu, gamma=mygamma, degree=mydegree,
-                                                 iteration=y,
-                                                 type="accuracy", trainSize=noTrain,
-                                                 class="overall", set = "test",
-                                                 value=cM$overall[["Accuracy"]]))
-          cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
-                                                 nu=mynu, gamma=mygamma, degree=mydegree,
-                                                 iteration=y,
-                                                 type="Sensitivity", trainSize=noTrain,
-                                                 class="overall", set = "test",
-                                                 value=cM$byClass["Sensitivity"]))
-          cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
-                                                 nu=mynu, gamma=mygamma, degree=mydegree,
-                                                 iteration=y,
-                                                 type="Specificity", trainSize=noTrain,
-                                                 class="overall", set = "test",
-                                                 value=cM$byClass["Specificity"]))
+                              ## Get the performance
+                              noTrain = trainset %>% nrow
+                              cv_analysis = tail(unlist(strsplit(iteration_dir, "\\/")), n=1)
+                              ## ---------------------- Test set -------------------------------------
+                              ## Concatenate the predictions to the true values
+                              testset$prediction = prediction
+                              testset = testset %>% select(type, prediction)
+                              testset = testset %>% mutate(p=ifelse(prediction==TRUE, "C", "N"))
+                              testset$type = factor(as.character(testset$type), levels = c("C", "N"))
+                              testset$p = factor(as.character(testset$p), levels = c("C", "N"))
 
-          ## ---------------------- Train set -------------------------------------
-          trainset$fitted = svm.model$fitted
-          trainset = trainset %>% select(type, fitted)
-          trainset = trainset %>% mutate(f=ifelse(fitted==TRUE, "C", "N"))
-          trainset$type = factor(as.character(trainset$type), levels = c("C", "N"))
-          trainset$f = factor(as.character(trainset$f), levels = c("C", "N"))
+                              ## Performance metrics
+                              ## Confusion matrix
+                              cv_stats = NULL
+                              cM <- confusionMatrix(testset$p,testset$type, positive = c("C"))
+                              cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                                                                     nu=mynu, gamma=mygamma, degree=mydegree,
+                                                                     iteration=y,
+                                                                     type="accuracy", trainSize=noTrain,
+                                                                     class="overall", set = "test",
+                                                                     value=cM$overall[["Accuracy"]]))
+                              cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                                                                     nu=mynu, gamma=mygamma, degree=mydegree,
+                                                                     iteration=y,
+                                                                     type="Sensitivity", trainSize=noTrain,
+                                                                     class="overall", set = "test",
+                                                                     value=cM$byClass["Sensitivity"]))
+                              cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                                                                     nu=mynu, gamma=mygamma, degree=mydegree,
+                                                                     iteration=y,
+                                                                     type="Specificity", trainSize=noTrain,
+                                                                     class="overall", set = "test",
+                                                                     value=cM$byClass["Specificity"]))
 
-          ## Confusion matrix
-          cM <- confusionMatrix(trainset$f,trainset$type, positive = c("C"))
-          cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
-                                                 nu=mynu, gamma=mygamma, degree=mydegree,
-                                                 iteration=y,
-                                                 type="accuracy", trainSize=noTrain,
-                                                 class="overall", set = "train",
-                                                 value=cM$overall[["Accuracy"]]))
-          cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
-                                                 nu=mynu, gamma=mygamma, degree=mydegree,
-                                                 iteration=y,
-                                                 type="Sensitivity", trainSize=noTrain,
-                                                 class="overall", set = "train",
-                                                 value=cM$byClass["Sensitivity"]))
-          cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
-                                                 nu=mynu, gamma=mygamma, degree=mydegree,
-                                                 iteration=y,
-                                                 type="Specificity", trainSize=noTrain,
-                                                 class="overall", set = "train",
-                                                 value=cM$byClass["Specificity"]))
+                              ## ---------------------- Train set -------------------------------------
+                              trainset$fitted = svm.model$fitted
+                              trainset = trainset %>% select(type, fitted)
+                              trainset = trainset %>% mutate(f=ifelse(fitted==TRUE, "C", "N"))
+                              trainset$type = factor(as.character(trainset$type), levels = c("C", "N"))
+                              trainset$f = factor(as.character(trainset$f), levels = c("C", "N"))
 
-        }
-        # update progress bar
-        setTxtProgressBar(pb, i)
-      }
+                              ## Confusion matrix
+                              cM <- confusionMatrix(trainset$f,trainset$type, positive = c("C"))
+                              cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                                                                     nu=mynu, gamma=mygamma, degree=mydegree,
+                                                                     iteration=y,
+                                                                     type="accuracy", trainSize=noTrain,
+                                                                     class="overall", set = "train",
+                                                                     value=cM$overall[["Accuracy"]]))
+                              cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                                                                     nu=mynu, gamma=mygamma, degree=mydegree,
+                                                                     iteration=y,
+                                                                     type="Sensitivity", trainSize=noTrain,
+                                                                     class="overall", set = "train",
+                                                                     value=cM$byClass["Sensitivity"]))
+                              cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                                                                     nu=mynu, gamma=mygamma, degree=mydegree,
+                                                                     iteration=y,
+                                                                     type="Specificity", trainSize=noTrain,
+                                                                     class="overall", set = "train",
+                                                                     value=cM$byClass["Specificity"]))
+                              return(cv_stats)
+                            }
+
+                        }
       close(pb)
+      stopCluster(cl)
+      cv_stats_full = rbind(cv_stats_full, result)
     }
 
   }
   ## write metrics
-  write.table(cv_stats, file=paste(output.dir,"/cv_stats.tsv",sep=""), quote=F, row.names = F, sep="\t")
+  write.table(cv_stats_full, file=paste(output.dir,"/cv_stats.tsv",sep=""), quote=F, row.names = F, sep="\t")
 }
 
 
