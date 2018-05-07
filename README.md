@@ -6,6 +6,6 @@ Patient-specific cancer driver prediction using support vector machines and syst
 > library(devtools)
 > install_github("thmourikis/sysSVM")
 
-#### Requirements ####
-
+#### Run test data ####
+syssvm(input.file = "example_data/oac_ML_input_formatted.tsv", output.dir = "OAC", exclude.features = c("young", "no_ALL_muts"), cores=2, iters = 10)
 
