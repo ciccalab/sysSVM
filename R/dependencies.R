@@ -14,14 +14,14 @@ for (pkgR in pkgsR){
   }
 }
 
-source("http://bioconductor.org/biocLite.R")
-
-pkgs  =  c("RDRToolbox")
-for (pkg in pkgs){
-  if (!pkg %in% rownames(installed.packages())) {
-    biocLite(pkg)
-    library(pkg, character.only = TRUE, quietly = TRUE)
-  } else {
-    library(pkg, character.only = TRUE, quietly = TRUE)
-  }
-}
+# source("http://bioconductor.org/biocLite.R")
+#
+# pkgs  =  c("RDRToolbox")
+# for (pkg in pkgs){
+#   if (!pkg %in% rownames(installed.packages())) {
+#     biocLite(pkg)
+#     library(pkg, character.only = TRUE, quietly = TRUE)
+#   } else {
+#     library(pkg, character.only = TRUE, quietly = TRUE)
+#   }
+# }
