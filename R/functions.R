@@ -528,6 +528,7 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
                           Sys.sleep(0.1)
                           mynu=param_grid[i, 1]
                           mygamma=param_grid[i, 2]
+                          mydegree=0
 
                           for(y in 1:iters){
                             iteration_dir <- create.output.folder(output.dir, k, mynu, mygamma, mydegree, y)

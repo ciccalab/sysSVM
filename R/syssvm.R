@@ -24,9 +24,8 @@ syssvm <- function(input.file=NULL, output.dir=NULL, exclude.features=NULL, mode
     trainingMode = FALSE
   }
 
-  #source("dependecies.R")
-  source("R/functions.R")
   source("R/dependencies.R")
+  source("R/functions.R")
 
   ## Create training and prediction sets
   createDescribeTrainingCGC(input.file=input.file, output.dir=output.dir, exclude.features=exclude.features,
