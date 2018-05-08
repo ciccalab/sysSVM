@@ -268,9 +268,10 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
                             mygamma=0
                             mydegree=0
 
+                            cv_stats_grid = NULL
                             for(y in 1:iters){
                               iteration_dir <- create.output.folder(output.dir, k, mynu, mygamma, mydegree, y)
-
+                              print(iteration_dir)
                               traingenes = sample(pgenes,ceiling(((CV-LO)/CV)*length(pgenes)))
                               testgenes = pgenes[!(pgenes%in%traingenes)]
 
@@ -312,7 +313,6 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
 
                               ## Get the performance
                               noTrain = trainset %>% nrow
-                              cv_analysis = tail(unlist(strsplit(iteration_dir, "\\/")), n=1)
                               ## ---------------------- Test set -------------------------------------
                               ## Concatenate the predictions to the true values
                               testset$prediction = prediction
@@ -325,19 +325,19 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
                               ## Confusion matrix
                               cv_stats = NULL
                               cM <- confusionMatrix(testset$p,testset$type, positive = c("C"))
-                              cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                              cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                      nu=mynu, gamma=mygamma, degree=mydegree,
                                                                      iteration=y,
                                                                      type="accuracy", trainSize=noTrain,
                                                                      class="overall", set = "test",
                                                                      value=cM$overall[["Accuracy"]]))
-                              cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                              cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                      nu=mynu, gamma=mygamma, degree=mydegree,
                                                                      iteration=y,
                                                                      type="Sensitivity", trainSize=noTrain,
                                                                      class="overall", set = "test",
                                                                      value=cM$byClass["Sensitivity"]))
-                              cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                              cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                      nu=mynu, gamma=mygamma, degree=mydegree,
                                                                      iteration=y,
                                                                      type="Specificity", trainSize=noTrain,
@@ -353,27 +353,27 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
 
                               ## Confusion matrix
                               cM <- confusionMatrix(trainset$f,trainset$type, positive = c("C"))
-                              cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                              cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                      nu=mynu, gamma=mygamma, degree=mydegree,
                                                                      iteration=y,
                                                                      type="accuracy", trainSize=noTrain,
                                                                      class="overall", set = "train",
                                                                      value=cM$overall[["Accuracy"]]))
-                              cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                              cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                      nu=mynu, gamma=mygamma, degree=mydegree,
                                                                      iteration=y,
                                                                      type="Sensitivity", trainSize=noTrain,
                                                                      class="overall", set = "train",
                                                                      value=cM$byClass["Sensitivity"]))
-                              cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                              cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                      nu=mynu, gamma=mygamma, degree=mydegree,
                                                                      iteration=y,
                                                                      type="Specificity", trainSize=noTrain,
                                                                      class="overall", set = "train",
                                                                      value=cM$byClass["Specificity"]))
-                              return(cv_stats)
+                              cv_stats_grid = rbind(cv_stats_grid, cv_stats)
                             }
-
+                          return(cv_stats_grid)
                         }
       close(pb)
       stopCluster(cl)
@@ -399,6 +399,7 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
                           mygamma=param_grid[i, 2]
                           mydegree=param_grid[i, 3]
 
+                          cv_stats_grid = NULL
                           for(y in 1:iters){
                             iteration_dir <- create.output.folder(output.dir, k, mynu, mygamma, mydegree, y)
 
@@ -443,7 +444,6 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
 
                             ## Get the performance
                             noTrain = trainset %>% nrow
-                            cv_analysis = tail(unlist(strsplit(iteration_dir, "\\/")), n=1)
                             ## ---------------------- Test set -------------------------------------
                             ## Concatenate the predictions to the true values
                             testset$prediction = prediction
@@ -456,19 +456,19 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
                             ## Confusion matrix
                             cv_stats = NULL
                             cM <- confusionMatrix(testset$p,testset$type, positive = c("C"))
-                            cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                            cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                    nu=mynu, gamma=mygamma, degree=mydegree,
                                                                    iteration=y,
                                                                    type="accuracy", trainSize=noTrain,
                                                                    class="overall", set = "test",
                                                                    value=cM$overall[["Accuracy"]]))
-                            cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                            cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                    nu=mynu, gamma=mygamma, degree=mydegree,
                                                                    iteration=y,
                                                                    type="Sensitivity", trainSize=noTrain,
                                                                    class="overall", set = "test",
                                                                    value=cM$byClass["Sensitivity"]))
-                            cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                            cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                    nu=mynu, gamma=mygamma, degree=mydegree,
                                                                    iteration=y,
                                                                    type="Specificity", trainSize=noTrain,
@@ -484,27 +484,27 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
 
                             ## Confusion matrix
                             cM <- confusionMatrix(trainset$f,trainset$type, positive = c("C"))
-                            cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                            cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                    nu=mynu, gamma=mygamma, degree=mydegree,
                                                                    iteration=y,
                                                                    type="accuracy", trainSize=noTrain,
                                                                    class="overall", set = "train",
                                                                    value=cM$overall[["Accuracy"]]))
-                            cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                            cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                    nu=mynu, gamma=mygamma, degree=mydegree,
                                                                    iteration=y,
                                                                    type="Sensitivity", trainSize=noTrain,
                                                                    class="overall", set = "train",
                                                                    value=cM$byClass["Sensitivity"]))
-                            cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                            cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                    nu=mynu, gamma=mygamma, degree=mydegree,
                                                                    iteration=y,
                                                                    type="Specificity", trainSize=noTrain,
                                                                    class="overall", set = "train",
                                                                    value=cM$byClass["Specificity"]))
-                            return(cv_stats)
+                            cv_stats_grid = rbind(cv_stats_grid, cv_stats)
                           }
-
+                          return(cv_stats_grid)
                         }
       close(pb)
       stopCluster(cl)
@@ -529,7 +529,7 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
                           mynu=param_grid[i, 1]
                           mygamma=param_grid[i, 2]
                           mydegree=0
-
+                          cv_stats_grid = NULL
                           for(y in 1:iters){
                             iteration_dir <- create.output.folder(output.dir, k, mynu, mygamma, mydegree, y)
 
@@ -574,7 +574,6 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
 
                             ## Get the performance
                             noTrain = trainset %>% nrow
-                            cv_analysis = tail(unlist(strsplit(iteration_dir, "\\/")), n=1)
                             ## ---------------------- Test set -------------------------------------
                             ## Concatenate the predictions to the true values
                             testset$prediction = prediction
@@ -587,19 +586,19 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
                             ## Confusion matrix
                             cv_stats = NULL
                             cM <- confusionMatrix(testset$p,testset$type, positive = c("C"))
-                            cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                            cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                    nu=mynu, gamma=mygamma, degree=mydegree,
                                                                    iteration=y,
                                                                    type="accuracy", trainSize=noTrain,
                                                                    class="overall", set = "test",
                                                                    value=cM$overall[["Accuracy"]]))
-                            cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                            cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                    nu=mynu, gamma=mygamma, degree=mydegree,
                                                                    iteration=y,
                                                                    type="Sensitivity", trainSize=noTrain,
                                                                    class="overall", set = "test",
                                                                    value=cM$byClass["Sensitivity"]))
-                            cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                            cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                    nu=mynu, gamma=mygamma, degree=mydegree,
                                                                    iteration=y,
                                                                    type="Specificity", trainSize=noTrain,
@@ -615,27 +614,27 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
 
                             ## Confusion matrix
                             cM <- confusionMatrix(trainset$f,trainset$type, positive = c("C"))
-                            cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                            cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                    nu=mynu, gamma=mygamma, degree=mydegree,
                                                                    iteration=y,
                                                                    type="accuracy", trainSize=noTrain,
                                                                    class="overall", set = "train",
                                                                    value=cM$overall[["Accuracy"]]))
-                            cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                            cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                    nu=mynu, gamma=mygamma, degree=mydegree,
                                                                    iteration=y,
                                                                    type="Sensitivity", trainSize=noTrain,
                                                                    class="overall", set = "train",
                                                                    value=cM$byClass["Sensitivity"]))
-                            cv_stats <- rbind(cv_stats, data.frame(analysis=cv_analysis, kernel=k,
+                            cv_stats <- rbind(cv_stats, data.frame(kernel=k,
                                                                    nu=mynu, gamma=mygamma, degree=mydegree,
                                                                    iteration=y,
                                                                    type="Specificity", trainSize=noTrain,
                                                                    class="overall", set = "train",
                                                                    value=cM$byClass["Specificity"]))
-                            return(cv_stats)
+                            cv_stats_grid = rbind(cv_stats_grid, cv_stats)
                           }
-
+                          return(cv_stats_grid)
                         }
       close(pb)
       stopCluster(cl)
@@ -649,8 +648,21 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
 
 
 ## Score genes
-# scoreGenes = function(ncg.tissue.name=NULL, gtex.tissue.name=NULL,
-#                       output.dir=NULL){
-#
-# }
+scoreGenes = function(ncg.tissue.name=NULL, gtex.tissue.name=NULL,
+                      output.dir=NULL){
+
+  cat("Summarising cross-validation", "\n")
+  cv_stats_fn = paste0(output.dir, "/cv_stats.tsv")
+  cv_stats = read.table(cv_stats_fn, header = T, sep = "\t")
+  cv_stats_summary <- cv_stats %>% subset(!is.na(value) & type=="Sensitivity" & set=="test") %>%
+    group_by(analysis, kernel, nu, gamma, degree) %>% summarize(iterations=n(),
+                                                                           min=min(value),
+                                                                           q1=quantile(value)[2],
+                                                                           median=median(value),
+                                                                           mean=mean(value),
+                                                                           q3=quantile(value)[4],
+                                                                           max=max(value),
+                                                                           var=stats::var(value)) %>% ungroup
+
+}
 
