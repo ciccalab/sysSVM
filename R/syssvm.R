@@ -41,11 +41,11 @@ syssvm <- function(input.file=NULL, output.dir=NULL, exclude.features=NULL, mode
   source("R/functions.R")
 
   ## Create training and prediction sets
-  # createDescribeTrainingCGC(input.file=input.file, output.dir=output.dir, exclude.features=exclude.features,
-  #                           trainingMode=trainingMode, models=models, scaling.factors=scaling.factors)
-  #
-  #
-  # runNoveltyDetection(output.dir=output.dir, cv=cv, iters=iters, kernels=kernels, cores=cores)
+  createDescribeTrainingCGC(input.file=input.file, output.dir=output.dir, exclude.features=exclude.features,
+                            trainingMode=trainingMode, models=models, scaling.factors=scaling.factors)
+
+
+  runNoveltyDetection(output.dir=output.dir, cv=cv, iters=iters, kernels=kernels, cores=cores)
 
   scoreGenes(ncg.tissue.name=ncg.tissue.name, output.dir=output.dir,
              exclude.features=exclude.features, reproduce=reproduce)
