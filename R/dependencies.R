@@ -4,7 +4,8 @@ pkgsR  =  c('plyr',
             'e1071',
             'sampling',
             'doSNOW',
-            'dplyr')
+            'dplyr',
+            'readxl')
 for (pkgR in pkgsR){
   if (!pkgR %in% rownames(installed.packages())) {
     install.packages(pkgR, dependencies=TRUE, INSTALL_opts = c('--no-lock'), repos = "https://cran.ma.imperial.ac.uk/")
