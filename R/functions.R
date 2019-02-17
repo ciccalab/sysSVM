@@ -211,27 +211,27 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
 
   create.output.folder = function (output.dir, kern, mynu, mygamma, mydegree, no) {
 
-    if(length(grep("Results",list.dirs(output.dir, recursive = F, full.names=F)))==0){
-      dir.create(paste(output.dir, "/Results", sep=""))
+    if(length(grep("CV",list.dirs(output.dir, recursive = F, full.names=F)))==0){
+      dir.create(paste(output.dir, "/CV", sep=""))
     }
     timer    = format(Sys.time(), "%Y-%m-%d.%H_%M_%S")
     if(kern=="linear"){
-      job_dir = paste(output.dir, "/Results/", kern,".",mynu, sep="" )
+      job_dir = paste(output.dir, "/CV/", kern,".",mynu, sep="" )
       if(!file.exists(job_dir)){
         dir.create(job_dir)
       }
     }else if (kern=="radial"){
-      job_dir = paste(output.dir, "/Results/", kern,".", mynu, ".", mygamma, sep="")
+      job_dir = paste(output.dir, "/CV/", kern,".", mynu, ".", mygamma, sep="")
       if(!file.exists(job_dir)){
         dir.create(job_dir)
       }
     }else if (kern=="polynomial"){
-      job_dir = paste(output.dir, "/Results/", kern,".", mynu, ".", mygamma, ".", mydegree, sep="")
+      job_dir = paste(output.dir, "/CV/", kern,".", mynu, ".", mygamma, ".", mydegree, sep="")
       if(!file.exists(job_dir)){
         dir.create(job_dir)
       }
     }else if (kern=="sigmoid"){
-      job_dir = paste(output.dir, "/Results/", kern,".", mynu, ".", mygamma, sep="")
+      job_dir = paste(output.dir, "/CV/", kern,".", mynu, ".", mygamma, sep="")
       if(!file.exists(job_dir)){
         dir.create(job_dir)
       }
@@ -648,6 +648,7 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
 
 
 ## Calculate the score of each gene
+## This function will run every 100 iters and calculate the most frequent set of genes
 getScore = function(path=NULL,
                     linear_preds=NULL, linearCVS=NULL, linearVar=NULL,
                     radial_preds=NULL, radialCVS=NULL, radialVar=NULL,
@@ -865,7 +866,7 @@ plattScaling = function(model, predictions){
 }
 
 ## Reproduce OAC results
-getSysCansOAC = function(output.dir=NULL, gtex.tissue=NULL, scores_fn="scores.Rdata",
+getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL, scores_fn="scores.Rdata",
                       fp_dir="example_data/NCG_false_positives.txt",
                       cgc_fn="example_data/518_CGC_annotation_2211.xlsx",
                       previous.studies="example_data/CGCs_to_be_considered_OAC.tsv",
@@ -957,7 +958,7 @@ getSysCansOAC = function(output.dir=NULL, gtex.tissue=NULL, scores_fn="scores.Rd
     mutate(type="P")%>%mutate(entrez=as.numeric(entrez))%>%data.frame()
   cohort = rbind(cgc_drivers, prediction_ns) ## Instead of the whole training, we use only the subset of the refined CGC
   ## Get scores
-  load(paste0(output.dir, "/",scores_fn))
+  load(paste0(working.dir, "/",scores_fn))
   scores = scores[["scores"]]
 
   cohort = cohort %>% left_join(scores)
@@ -1017,39 +1018,22 @@ getSysCansOAC = function(output.dir=NULL, gtex.tissue=NULL, scores_fn="scores.Rd
 
 }
 
+
 ## Score genes
 scoreGenes = function(ncg.tissue.name=NULL,
                       output.dir=NULL, exclude.features=NULL,
-                      reproduce){
+                      iters=NULL,
+                      step=NULL,
+                      top.rank=10,
+                      refine=TRUE,
+                      gtex.tissue="Esophagus"){
 
   cat("Summarising cross-validation", "\n")
   cv_stats_fn = paste0(output.dir, "/cv_stats.tsv")
   cv_stats = read.table(cv_stats_fn, header = T, sep = "\t")
-  cv_stats_summary <- cv_stats %>% subset(!is.na(value) & type=="Sensitivity" & set=="test") %>%
-    group_by(kernel, nu, gamma, degree) %>% summarize(iterations=n(),
-                                                                           min=min(value),
-                                                                           q1=quantile(value)[2],
-                                                                           median=median(value),
-                                                                           mean=mean(value),
-                                                                           q3=quantile(value)[4],
-                                                                           max=max(value),
-                                                                           var=stats::var(value)) %>% ungroup
-  cv_stats_summary$analysis = paste(cv_stats_summary$kernel, cv_stats_summary$nu, cv_stats_summary$gamma, cv_stats_summary$degree, sep=".")
 
-  write.table(cv_stats_summary, file=paste0(output.dir,"/cv_stats_summary.tsv"), quote=F, row.names=F, sep="\t")
-
-  ## -------------------
-  ## Get the best models
-  ## -------------------
-  best_models = NULL
-  cat("Getting best models for:", "\n")
-  for (k in unique(cv_stats_summary$kernel)){
-    cat(k, "\n")
-    d = cv_stats_summary %>% subset(kernel==k) %>% data.frame()
-    bm = d %>% arrange(desc(mean)) %>% slice(1:5) %>% mutate(var_rank=row_number(var)) %>% subset(var_rank==1)
-    best_models = rbind(best_models, bm)
-  }
-  write.table(best_models, file=paste0(output.dir,"/best_models.tsv"), quote=F, row.names=F, sep="\t")
+  outDir = paste0(output.dir, "/Results/")
+  dir.create(outDir) ## Write results in a separate directory
 
   load("example_data/geneInfoNCG5_2.Rdata")
   load("example_data/cancerGenesNCG5_2.Rdata")
@@ -1059,7 +1043,6 @@ scoreGenes = function(ncg.tissue.name=NULL,
   if (!(ncg.tissue.name%in%ncg_tissues)){
     stop("Please provide a valid tissue for NCG5!")
   }
-
 
   ## Load training and prediction sets
   load(paste(output.dir, "/training_set.Rdata", sep=""))
@@ -1072,7 +1055,6 @@ scoreGenes = function(ncg.tissue.name=NULL,
   if(!is.null(exclude.features)){
     s = s[!(s%in%exclude.features)]
   }
-
 
   prediction_ns = prediction_ns %>% tibble::rownames_to_column() %>%
     separate(rowname, into=c("sample", "entrez"), sep="\\.") %>%
@@ -1095,96 +1077,152 @@ scoreGenes = function(ncg.tissue.name=NULL,
   training=Filter(function(x)!all(is.nan(x)), training)
   prediction=Filter(function(x)!all(is.nan(x)), prediction)
 
-  cat("Predicting using kernel:", "\n")
-  for (i in 1:nrow(best_models)){
-    kern = as.character(best_models$kernel[i])
-    analysis = best_models$analysis[i]
-    mynu=best_models$nu[i]
-    mygamma=best_models$gamma[i]
-    mydegree=best_models$degree[i]
+  ## Check the steps to summarise the results
+  steps = seq(0,iters,step)
+  steps = steps[2:length(steps)]
+  if(steps[length(steps)]!=iters){steps[length(steps)]=iters}
 
-    ## Train on the whole set
-    cat(kern, "\n")
+  geneLists = list()
+  recurrence_table = NULL
 
-    if (kern=="linear"){
-      svm.model <- svm(type ~ ., data = training, kernel=kern, type="one-classification", scale=FALSE, nu=mynu)
-    }else if (kern=="radial"){
-      svm.model <- svm(type ~ ., data = training, kernel=kern, type="one-classification", scale=FALSE, gamma=mygamma, nu=mynu)
-    }else if (kern=="polynomial"){
-      svm.model <- svm(type ~ ., data = training, kernel=kern, type="one-classification", scale=FALSE, gamma=mygamma, nu=mynu, degree=mydegree)
-    }else if (kern=="sigmoid"){
-      svm.model <- svm(type ~ ., data = training, kernel=kern, type="one-classification", scale=FALSE, gamma=mygamma, nu=mynu)
+  for(st in steps){
+    cat(paste0("Current step: Scoring at ", st, " iterations..."))
+    outDir2 = paste0(output.dir, "/Results/", st, "/")
+    dir.create(outDir2) ## Write results in a separate directory
+    cv_stats_summary <- cv_stats %>% subset(!is.na(value) & type=="Sensitivity" & set=="test" & iteration<=st) %>%
+      group_by(kernel, nu, gamma, degree) %>% summarize(iterations=n(),
+                                                        min=min(value),
+                                                        q1=quantile(value)[2],
+                                                        median=median(value),
+                                                        mean=mean(value),
+                                                        q3=quantile(value)[4],
+                                                        max=max(value),
+                                                        var=stats::var(value)) %>% ungroup
+    cv_stats_summary$analysis = paste(cv_stats_summary$kernel, cv_stats_summary$nu, cv_stats_summary$gamma, cv_stats_summary$degree, sep=".")
+
+    write.table(cv_stats_summary, file=paste0(outDir2,"/cv_stats_summary.tsv"), quote=F, row.names=F, sep="\t")
+
+    ## -------------------
+    ## Get the best models
+    ## -------------------
+    best_models = NULL
+    for (k in unique(cv_stats_summary$kernel)){
+      d = cv_stats_summary %>% subset(kernel==k) %>% data.frame()
+      bm = d %>% arrange(desc(mean)) %>% slice(1:5) %>% mutate(var_rank=row_number(var)) %>% subset(var_rank==1)
+      best_models = rbind(best_models, bm)
+    }
+    write.table(best_models, file=paste0(outDir2,"/best_models.tsv"), quote=F, row.names=F, sep="\t")
+
+    for (i in 1:nrow(best_models)){
+      kern = as.character(best_models$kernel[i])
+      analysis = best_models$analysis[i]
+      mynu=best_models$nu[i]
+      mygamma=best_models$gamma[i]
+      mydegree=best_models$degree[i]
+
+      if (kern=="linear"){
+        svm.model <- svm(type ~ ., data = training, kernel=kern, type="one-classification", scale=FALSE, nu=mynu)
+      }else if (kern=="radial"){
+        svm.model <- svm(type ~ ., data = training, kernel=kern, type="one-classification", scale=FALSE, gamma=mygamma, nu=mynu)
+      }else if (kern=="polynomial"){
+        svm.model <- svm(type ~ ., data = training, kernel=kern, type="one-classification", scale=FALSE, gamma=mygamma, nu=mynu, degree=mydegree)
+      }else if (kern=="sigmoid"){
+        svm.model <- svm(type ~ ., data = training, kernel=kern, type="one-classification", scale=FALSE, gamma=mygamma, nu=mynu)
+      }
+
+      ## Asses training sensitivity
+      trainset = training %>% select(type)
+      trainset$fitted = svm.model$fitted
+      trainset = trainset %>% select(type, fitted)
+      trainset = trainset %>% mutate(f=ifelse(fitted==TRUE, "C", "N"))
+      trainset$type = factor(as.character(trainset$type), levels = c("C", "N"))
+      trainset$f = factor(as.character(trainset$f), levels = c("C", "N"))
+      ## Confusion matrix
+      cM <- confusionMatrix(trainset$f,trainset$type, positive = c("C"))
+      training_sensitivity = cM$byClass["Sensitivity"]
+
+      ## make prediction
+      predictions = predict(svm.model, prediction, decision.values = TRUE)
+      ## add probability from Platt and Binning
+      predictions_platt = plattScaling(svm.model, predictions)
+      colnames(predictions_platt) = c("dv", "label", "prob_platt")
+      preds = predictions_platt %>% tibble::rownames_to_column()
+
+      ## Take information from gene info
+      preds = preds %>%
+        separate(rowname, into=c("sample", "entrez"), sep="\\.") %>%
+        mutate(entrez=as.numeric(entrez)) %>%
+        left_join(geneInfo%>%rename(gene_type=cancer_type), by=c("entrez"))
+
+      ## Join also with systems level properties from validaton set
+      preds = preds %>% left_join(prediction_ns, by=c("sample", "entrez"))
+
+
+      save(svm.model, file=paste(outDir2,"/model_",analysis, ".Rdata", sep=""))
+      save(preds, file=paste(outDir2,"/predictions_",analysis, ".Rdata", sep=""))
     }
 
+    ## Get the scores (based on the best models above)
+    LINEAR_PREDS = best_models$analysis[best_models$kernel=="linear"]
+    LINEAR_CVS = round(best_models$mean[best_models$kernel=="linear"], digits = 2)
+    LINEAR_VAR = round(best_models$var[best_models$kernel=="linear"], digits = 2)
 
-    ## Asses training sensitivity
-    trainset = training %>% select(type)
-    trainset$fitted = svm.model$fitted
-    trainset = trainset %>% select(type, fitted)
-    trainset = trainset %>% mutate(f=ifelse(fitted==TRUE, "C", "N"))
-    trainset$type = factor(as.character(trainset$type), levels = c("C", "N"))
-    trainset$f = factor(as.character(trainset$f), levels = c("C", "N"))
-    ## Confusion matrix
-    cM <- confusionMatrix(trainset$f,trainset$type, positive = c("C"))
-    training_sensitivity = cM$byClass["Sensitivity"]
+    POLYNOMIAL_PREDS = best_models$analysis[best_models$kernel=="polynomial"]
+    POLYNOMIAL_CVS = round(best_models$mean[best_models$kernel=="polynomial"], digits = 2)
+    POLYNOMIAL_VAR = round(best_models$var[best_models$kernel=="polynomial"], digits = 2)
 
-    ## make prediction
-    predictions = predict(svm.model, prediction, decision.values = TRUE)
-    ## add probability from Platt and Binning
-    predictions_platt = plattScaling(svm.model, predictions)
-    colnames(predictions_platt) = c("dv", "label", "prob_platt")
-    preds = predictions_platt %>% tibble::rownames_to_column()
+    RADIAL_PREDS = best_models$analysis[best_models$kernel=="radial"]
+    RADIAL_CVS = round(best_models$mean[best_models$kernel=="radial"], digits = 2)
+    RADIAL_VAR = round(best_models$var[best_models$kernel=="radial"], digits = 2)
 
-    ## Take information from gene info
-    preds = preds %>%
-      separate(rowname, into=c("sample", "entrez"), sep="\\.") %>%
-      mutate(entrez=as.numeric(entrez)) %>%
-      left_join(geneInfo%>%rename(gene_type=cancer_type), by=c("entrez"))
+    SIGMOID_PREDS = best_models$analysis[best_models$kernel=="sigmoid"]
+    SIGMOID_CVS = round(best_models$mean[best_models$kernel=="sigmoid"], digits = 2)
+    SIGMOID_VAR = round(best_models$var[best_models$kernel=="sigmoid"], digits = 2)
 
-    ## Join also with systems level properties from validaton set
-    preds = preds %>% left_join(prediction_ns, by=c("sample", "entrez"))
+    #save.image(file = paste0(output.dir, "/namespace.Rdata"))
 
+    scores = getScore(path=outDir2,
+                      linear_preds = paste0("/predictions_", LINEAR_PREDS, ".Rdata"), linearCVS = LINEAR_CVS, linearVar = LINEAR_VAR,
+                      radial_preds = paste0("/predictions_", RADIAL_PREDS, ".Rdata"), radialCVS = RADIAL_CVS, radialVar = RADIAL_VAR,
+                      polynomial_preds = paste0("/predictions_", POLYNOMIAL_PREDS, ".Rdata"), polynomialCVS = POLYNOMIAL_CVS, polynomialVar = POLYNOMIAL_VAR,
+                      sigmoid_preds = paste0("/predictions_", SIGMOID_PREDS, ".Rdata"), sigmoidCVS = SIGMOID_CVS, sigmoidVar = SIGMOID_VAR)
 
-    save(svm.model, file=paste(output.dir,"/model_",analysis, ".Rdata", sep=""))
-    save(preds, file=paste(output.dir,"/predictions_",analysis, ".Rdata", sep=""))
+    save(scores, file=paste0(outDir2, "/scores.Rdata"))
+
+    if(refine){
+      ## Add refined CGCs, exclude "Not expressed" genes and define patient ranks
+      ## Then I use the getSysCans (source it from config.R) to get a data frame with the ranks. Command as follows:
+      syscan = getSysCansOAC(output.dir = output.dir, working.dir = outDir2, gtex.tissue = gtex.tissue)
+      ## And then save it
+      save(syscan, file=paste0(outDir2, "/syscan.Rdata"))
+      cat("\n")
+    }## proper function to calculate ranks will be added here (instead of getSysCansOAC)
+
+    ## Check genes and decide whether to stop or not
+    top_syscans = syscan %>% subset(patient.rank<=top.rank)
+    geneLists[[as.character(st)]] = unique(top_syscans$entrez)
   }
 
-  ## Get the scores (based on the best models above)
-  cat("Calculating scores...", "\n")
-  LINEAR_PREDS = best_models$analysis[best_models$kernel=="linear"]
-  LINEAR_CVS = round(best_models$mean[best_models$kernel=="linear"], digits = 2)
-  LINEAR_VAR = round(best_models$var[best_models$kernel=="linear"], digits = 2)
+  unique_predictions = NULL
+  count = 1
+  for(ul in unique(geneLists)){
+    l = lapply(geneLists, function(x) sum(x==ul)==length(ul))
+    oc = sum(unlist(l))
+    iterations_predicted = paste0(names(which(l ==TRUE)), collapse=",")
+    d = data.frame(list = count, occurences = oc, iterations=iterations_predicted)
+    unique_predictions = rbind(unique_predictions, d)
+    count = count + 1
+  }
 
-  POLYNOMIAL_PREDS = best_models$analysis[best_models$kernel=="polynomial"]
-  POLYNOMIAL_CVS = round(best_models$mean[best_models$kernel=="polynomial"], digits = 2)
-  POLYNOMIAL_VAR = round(best_models$var[best_models$kernel=="polynomial"], digits = 2)
+  unique_predictions = unique_predictions %>% dplyr::arrange(desc(occurences)) %>% dplyr::mutate(steps=length(steps), frequency=occurences/steps)
+  write.table(unique_predictions, file=paste0(output.dir, "/gene_prediction_frequency.tsv"), row.names = F, sep="\t", quote = F)
 
-  RADIAL_PREDS = best_models$analysis[best_models$kernel=="radial"]
-  RADIAL_CVS = round(best_models$mean[best_models$kernel=="radial"], digits = 2)
-  RADIAL_VAR = round(best_models$var[best_models$kernel=="radial"], digits = 2)
-
-  SIGMOID_PREDS = best_models$analysis[best_models$kernel=="sigmoid"]
-  SIGMOID_CVS = round(best_models$mean[best_models$kernel=="sigmoid"], digits = 2)
-  SIGMOID_VAR = round(best_models$var[best_models$kernel=="sigmoid"], digits = 2)
-
-  save.image(file = paste0(output.dir, "/namespace.Rdata"))
-
-  scores = getScore(path=output.dir,
-                    linear_preds = paste0("/predictions_", LINEAR_PREDS, ".Rdata"), linearCVS = LINEAR_CVS, linearVar = LINEAR_VAR,
-                    radial_preds = paste0("/predictions_", RADIAL_PREDS, ".Rdata"), radialCVS = RADIAL_CVS, radialVar = RADIAL_VAR,
-                    polynomial_preds = paste0("/predictions_", POLYNOMIAL_PREDS, ".Rdata"), polynomialCVS = POLYNOMIAL_CVS, polynomialVar = POLYNOMIAL_VAR,
-                    sigmoid_preds = paste0("/predictions_", SIGMOID_PREDS, ".Rdata"), sigmoidCVS = SIGMOID_CVS, sigmoidVar = SIGMOID_VAR)
-
-  save(scores, file=paste0(output.dir, "/scores.Rdata"))
-
-
-  if(reproduce){
-    ## Add refined CGCs, exclude "Not expressed" genes and define patient ranks
-    ## Then I use the getSysCans (source it from config.R) to get a data frame with the ranks. Command as follows:
-    syscan = getSysCansOAC(output.dir = output.dir, gtex.tissue = "Esophagus")
-    ## And then save it
-    save(syscan, file=paste0(output.dir, "/syscan.Rdata"))
-  }## proper function to calculate ranks will be added here (instead of getSysCansOAC)
+  ## And finally export the most frequent list (from the bigest number of iterations to approximate the true values of scores/sensitivity of the models)
+  check_max = which(unique_predictions$frequency==max(unique_predictions$frequency))
+  find_iter = as.numeric(unlist(strsplit(unique_predictions$iterations[check_max], ",")))
+  find_iter = max(find_iter)
+  file.copy(paste0(output.dir, "/Results/", find_iter, "/syscan.Rdata"), paste0(output.dir, "/syscan.Rdata"))
+  file.copy(paste0(output.dir, "/Results/", find_iter, "/scores.Rdata"), paste0(output.dir, "/scores.Rdata"))
 
 
 }
