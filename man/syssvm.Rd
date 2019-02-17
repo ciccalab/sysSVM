@@ -4,12 +4,47 @@
 \alias{syssvm}
 \title{Run sysSVM}
 \usage{
-syssvm(input.file = NULL, output.dir = NULL, exclude.features = NULL,
-  models = NULL, scaling.factors = NULL)
+syssvm(input.file = "example_data/oac_ML_input_formatted.tsv",
+  output.dir = "OAC", exclude.features = c("young", "no_ALL_muts"),
+  models = NULL, scaling.factors = NULL, cv = 3, iters = 1000,
+  step = 100, top.rank = 10, kernels = c("linear", "polynomial", "radial",
+  "sigmoid"), cores = 2, ncg.tissue.name = "esophagus", refine = TRUE)
 }
 \arguments{
-\item{object}{an object, whose class determines}
+\item{input.file}{Path to input file [default is "example_data/oac_ML_input_formatted.tsv"]}
+
+\item{output.dir}{Path to output directory where sysSVM results will be written [default is "OAC"]}
+
+\item{exclude.features}{Features to be excluded from training/prediction [default is c("young", "no_ALL_muts")]}
+
+\item{models}{Functionality to use already trained models for new samples}
+
+\item{scaling.factors}{Object with sysSVM scaling factors. Use this to make predictions using already-trained sysSVM models}
+
+\item{cv}{k-fold cross-validation [default is 3]}
+
+\item{iters}{Iterations to be performed during ross-validation [default is 1000]}
+
+\item{step}{Step to summarise results (i.e. every step iterations) [default is 100]}
+
+\item{top.rank}{Sys-candidates to be considered per patient [default is 10]}
+
+\item{kernels}{Kernels to be used for training/prediction [default is c("linear", "polynomial", "radial", "sigmoid")]}
+
+\item{cores}{Multi-core functionality [default is 2]}
+
+\item{ncg.tissue.name}{NCG tissue for refinement of sys-candidates [default is "esophagus"]}
+
+\item{refine}{set to TRUE to refine scores based on gtex expression and previously published results}
 }
 \description{
 \code{syssvm} uses e1071 to run an one-class SVM
+}
+\examples{
+syssvm()
+
+
+
+
+
 }
