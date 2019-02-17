@@ -22,10 +22,13 @@
 #'
 #'
 
-syssvm <- function(input.file=NULL, output.dir=NULL, exclude.features=NULL, models=NULL,
-                   scaling.factors=NULL, cv=3, iters=100,
+syssvm <- function(input.file="example_data/oac_ML_input_formatted.tsv",
+                   output.dir="OAC", exclude.features=c("young", "no_ALL_muts"),
+                   models=NULL,
+                   scaling.factors=NULL,
+                   cv=3, iters=10, step=2,top.rank=10,
                    kernels=c("linear", "polynomial", "radial", "sigmoid"),
-                   cores=2, ncg.tissue.name=NULL, reproduce=FALSE) {
+                   cores=2, ncg.tissue.name="esophagus", refine=TRUE) {
 
   if(is.null(input.file) | is.null(output.dir)){
     stop("sysSVM ERROR: Input/Output file unknown, please provide input file and output directory")
@@ -48,6 +51,7 @@ syssvm <- function(input.file=NULL, output.dir=NULL, exclude.features=NULL, mode
   runNoveltyDetection(output.dir=output.dir, cv=cv, iters=iters, kernels=kernels, cores=cores)
 
   scoreGenes(ncg.tissue.name=ncg.tissue.name, output.dir=output.dir,
-             exclude.features=exclude.features, reproduce=reproduce)
+             iters=iters, step=step, top.rank=top.rank,
+             exclude.features=exclude.features, refine=refine)
 
 }
