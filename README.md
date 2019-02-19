@@ -11,5 +11,6 @@ Patient-specific cancer driver prediction using support vector machines and syst
 
 #### Run test data ####
 ```r
+> library(sysSVM)
 > syssvm()
 ```
