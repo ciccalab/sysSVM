@@ -6,7 +6,7 @@
 ## Marking of training/prediction set
 markTrainCGC <- function(df){
 
-  geneInfo=sySVM:::geneInfo
+  geneInfo=sysSVM:::geneInfo
   cancerGenes=sysSVM:::cancerGenes
 
   ## Get information for cgc/cans and primary sites
