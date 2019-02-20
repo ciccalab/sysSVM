@@ -1,0 +1,477 @@
+Gene.symbol	Description	Altered	already.considered	previous.studies	Type	Literature.support	to.be.considered
+TP53	tumor protein p53	201	TRUE	TRUE	Mutations	Secrier et al. 2016,Agrawal et al., 2012,Dulak et al., 2013,Weaver et al., 2014,Ross-Ines et al., 2015	TRUE
+CDKN2A	cyclin-dependent kinase inhibitor 2A (p16(INK4a)) gene	78	TRUE	TRUE	SVs,Mutations,Deletion	Secrier et al. 2016,Dulak et al., 2013,Weaver et al., 2014,Ross-Ines et al., 2015,TCGA, 2017	TRUE
+FHIT	fragile histidine triad gene	77	FALSE	TRUE	SVs	Secrier et al. 2016	TRUE
+MYC	v-myc myelocytomatosis viral O homolog (avian)	55	TRUE	TRUE	Amplification	TCGA, 2017	TRUE
+ERBB2	v-erb-b2 erythroblastic leukemia viral O homolog 2, neuro/glioblastoma derived O homolog (avian)	51	TRUE	TRUE	CNVs,Mutations,Amplification	Secrier et al. 2016,Dulak et al., 2013,TCGA, 2017	TRUE
+SMAD4	SMAD family member 4	49	TRUE	TRUE	Mutations,Deletion	Secrier et al. 2016,Dulak et al., 2013,Weaver et al., 2014,Ross-Ines et al., 2015,TCGA, 2017	TRUE
+CDK12	cyclin-dependent kinase 12	42	TRUE	TRUE	CNVs	Secrier et al. 2016	TRUE
+CDK6	cyclin-dependent kinase 6	40	TRUE	TRUE	CNVs,Amplification	Secrier et al. 2016,TCGA, 2017	TRUE
+KRAS	v-Ki-ras2 Kirsten rat sarcoma 2 viral O homolog	39	TRUE	TRUE	CNVs,Mutations,Amplification	Secrier et al. 2016,Dulak et al., 2013,TCGA, 2017	TRUE
+TRRAP	transformation/transcription domain-associated protein	39	TRUE	TRUE	CNVs	Secrier et al. 2016	TRUE
+ARID1A	AT rich interactive domain 1A (SWI-like)	38	TRUE	TRUE	Mutations	Secrier et al. 2016,Dulak et al., 2013,Weaver et al., 2014,Ross-Ines et al., 2015	TRUE
+AKAP9	A kinase (PRKA) anchor protein (yotiao) 9	38	TRUE	TRUE	CNVs	Secrier et al. 2016	TRUE
+ZNF521	zinc finger protein 521	36	TRUE	TRUE	CNVs	Secrier et al. 2016	TRUE
+RARA	retinoic acid receptor, alpha	35	FALSE	TRUE	CNVs	Secrier et al. 2016	TRUE
+SDC4	syndecan 4	35	FALSE	FALSE	NA	NA	FALSE
+CCND1	cyclin D1	34	TRUE	TRUE	CNVs,Amplification	Secrier et al. 2016,Ross-Ines et al., 2015,TCGA, 2017	TRUE
+EGFR	epidermal growth factor receptor (erythroblastic leukemia viral (v-erb-b) O homolog, avian)	34	TRUE	TRUE	Amplification	TCGA, 2017	TRUE
+GNAS	guanine nucleotide binding protein (G protein), alpha stimulating activity polypeptide 1	33	TRUE	FALSE	NA	NA	TRUE
+TOP1	topoisomerase (DNA) I	33	FALSE	FALSE	NA	NA	FALSE
+ASXL1	additional sex combs like 1	33	TRUE	FALSE	NA	NA	TRUE
+RUNX1	runt-related transcription factor 1  (AML1)	32	TRUE	TRUE	SVs	Secrier et al. 2016	TRUE
+CCNE1	cyclin E1	31	TRUE	TRUE	CNVs,Amplification	Secrier et al. 2016,TCGA, 2017	TRUE
+MAFB	v-maf musculoaponeurotic fibrosarcoma O homolog B (avian)	30	FALSE	FALSE	NA	NA	FALSE
+SS18L1	synovial sarcoma translocation gene on chromosome 18-like 1	30	FALSE	TRUE	CNVs	Secrier et al. 2016	TRUE
+SMARCE1	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily e, member 1	27	FALSE	TRUE	CNVs	Secrier et al. 2016	TRUE
+EXT1	multiple exostoses type 1 gene	26	FALSE	FALSE	NA	NA	FALSE
+RB1	retinoblastoma gene	26	TRUE	FALSE	NA	NA	TRUE
+CCND3	cyclin D3	25	TRUE	FALSE	NA	NA	TRUE
+TFEB	transcription factor EB	25	FALSE	FALSE	NA	NA	FALSE
+APC	adenomatous polyposis of the colon gene	23	TRUE	TRUE	Mutations	Agrawal et al., 2012	TRUE
+BRCA2	familial breast/ovarian cancer gene 2	23	TRUE	FALSE	NA	NA	TRUE
+FOXO1	forkhead box O1	23	TRUE	FALSE	NA	NA	TRUE
+PIK3CA	phosphoinositide-3-kinase, catalytic, alpha polypeptide	23	TRUE	TRUE	Mutations	Dulak et al., 2013	TRUE
+NDRG1	N-myc downstream regulated 1	23	FALSE	FALSE	NA	NA	FALSE
+CRLF2	cytokine receptor-like factor 2	23	TRUE	FALSE	NA	NA	TRUE
+MECOM	MDS1 and EVI1 complex locus	21	TRUE	TRUE	SVs	Secrier et al. 2016	TRUE
+SMARCA4	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily a, member 4	21	TRUE	TRUE	Mutations	Dulak et al., 2013,Weaver et al., 2014,Ross-Ines et al., 2015,TCGA, 2017	TRUE
+P2RY8	purinergic receptor P2Y, G-protein coupled, 8	21	TRUE	FALSE	NA	NA	TRUE
+LHFP	lipoma HMGIC fusion partner	20	FALSE	TRUE	CNVs	Secrier et al. 2016	TRUE
+UBR5	ubiquitin protein ligase E3 component n-recognin 5	20	TRUE	FALSE	NA	NA	TRUE
+LCP1	lymphocyte cytosolic protein 1 (L-plastin)	19	FALSE	FALSE	NA	NA	FALSE
+LIFR	leukemia inhibitory factor receptor	19	FALSE	FALSE	NA	NA	FALSE
+RECQL4	RecQ protein-like 4	19	FALSE	TRUE	CNVs	Secrier et al. 2016	TRUE
+BCL3	B-cell CLL/lymphoma 3	18	FALSE	FALSE	NA	NA	FALSE
+RUNX1T1	runt-related transcription factor 1; translocated to, 1 (cyclin D-related)	18	TRUE	FALSE	NA	NA	TRUE
+NOTCH1	Notch homolog 1, translocation-associated (Drosophila) (TAN1)	18	TRUE	FALSE	NA	NA	TRUE
+NUMA1	nuclear mitotic apparatus protein 1	18	FALSE	FALSE	NA	NA	FALSE
+POU5F1	POU domain, class 5, transcription factor 1	18	FALSE	FALSE	NA	NA	FALSE
+RAD21	RAD21 homolog (S. pombe)	18	TRUE	FALSE	NA	NA	TRUE
+TERT	telomerase reverse transcriptase	17	TRUE	FALSE	NA	NA	TRUE
+CBLC	Cas-Br-M (murine) ecotropic retroviral transforming sequence c	17	TRUE	FALSE	NA	NA	TRUE
+ATM	ataxia telangiectasia mutated	16	TRUE	FALSE	NA	NA	TRUE
+HSP90AB1	heat shock protein 90kDa alpha (cytosolic), class B member 1	16	FALSE	FALSE	NA	NA	FALSE
+MDM2	Mdm2 p53 binding protein homolog	16	TRUE	FALSE	NA	NA	TRUE
+CAMTA1	calmodulin binding transcription activator 1	16	TRUE	FALSE	NA	NA	TRUE
+IL7R	interleukin 7 receptor	15	TRUE	FALSE	NA	NA	TRUE
+AFF3	AF4/FMR2 family, member 3	15	FALSE	FALSE	NA	NA	FALSE
+LASP1	LIM and SH3 protein 1	15	FALSE	TRUE	CNVs	Secrier et al. 2016	TRUE
+NBN	nibrin	15	FALSE	FALSE	NA	NA	FALSE
+SETBP1	SET binding protein 1	15	TRUE	FALSE	NA	NA	TRUE
+WHSC1L1	Wolf-Hirschhorn syndrome candidate 1-like 1 (NSD3)	15	FALSE	FALSE	NA	NA	FALSE
+SNX29	-	15	FALSE	FALSE	NA	NA	FALSE
+COX6C	cytochrome c oxidase subunit VIc	14	FALSE	FALSE	NA	NA	FALSE
+NF1	neurofibromatosis type 1 gene	14	TRUE	FALSE	NA	NA	TRUE
+RAD51B	RAD51 paralog B	14	FALSE	FALSE	NA	NA	FALSE
+CDX2	caudal type homeo box transcription factor 2	13	FALSE	FALSE	NA	NA	FALSE
+HIP1	huntingtin interacting protein 1	13	FALSE	FALSE	NA	NA	FALSE
+MET	met proto-O (hepatocyte growth factor receptor)	13	TRUE	FALSE	NA	NA	TRUE
+MLLT6	myeloid/lymphoid or mixed-lineage leukemia (trithorax homolog, Drosophila); translocated to, 6 (AF17)	13	FALSE	TRUE	CNVs	Secrier et al. 2016	TRUE
+MUC1	mucin 1, transmembrane	13	FALSE	FALSE	NA	NA	FALSE
+KAT6A	K(lysine) acetyltransferase 6A	13	TRUE	TRUE	Mutations	Dulak et al., 2013	TRUE
+HOOK3	hook homolog 3	13	FALSE	FALSE	NA	NA	FALSE
+AKT2	v-akt murine thymoma viral O homolog 2	12	TRUE	FALSE	NA	NA	TRUE
+CDH11	cadherin 11, type 2, OB-cadherin (osteoblast)	12	FALSE	FALSE	NA	NA	FALSE
+CEBPA	CCAAT/enhancer binding protein (C/EBP), alpha	12	TRUE	FALSE	NA	NA	TRUE
+ELN	elastin	12	TRUE	FALSE	NA	NA	TRUE
+ERCC2	excision repair cross-complementing rodent repair deficiency, complementation group 2 (xeroderma pigmentosum D)	12	TRUE	FALSE	NA	NA	TRUE
+ETV6	ets variant gene 6 (TEL O)	12	TRUE	FALSE	NA	NA	TRUE
+FANCG	Fanconi anemia, complementation group G	12	FALSE	FALSE	NA	NA	FALSE
+FGFR1	fibroblast growth factor receptor 1	12	TRUE	FALSE	NA	NA	TRUE
+FLT3	fms-related tyrosine kinase 3	12	TRUE	FALSE	NA	NA	TRUE
+KMT2A	lysine (K)-specific methyltransferase 2A	12	TRUE	FALSE	NA	NA	TRUE
+PAX5	paired box gene 5 (B-cell lineage specific activator protein)	12	TRUE	FALSE	NA	NA	TRUE
+SRGAP3	SLIT-ROBO Rho GTPase activating protein 3	12	FALSE	FALSE	NA	NA	FALSE
+IKZF1	IKAROS family zinc finger 1	12	TRUE	FALSE	NA	NA	TRUE
+ERC1	ELKS/RAB6-interacting/CAST family member 1	12	FALSE	FALSE	NA	NA	FALSE
+SBDS	Shwachman-Bodian-Diamond syndrome protein	12	FALSE	TRUE	CNVs	Secrier et al. 2016	TRUE
+PBRM1	polybromo 1	12	TRUE	FALSE	NA	NA	TRUE
+KMT2C	lysine (K)-specific methyltransferase 2C	12	TRUE	FALSE	NA	NA	TRUE
+ARNT	aryl hydrocarbon receptor nuclear translocator	11	FALSE	FALSE	NA	NA	FALSE
+BLM	Bloom Syndrome	11	FALSE	FALSE	NA	NA	FALSE
+CBL	Cas-Br-M (murine) ecotropic retroviral transforming	11	TRUE	FALSE	NA	NA	TRUE
+FGFR2	fibroblast growth factor receptor 2	11	TRUE	FALSE	NA	NA	TRUE
+CNOT3	CCR4-NOT transcription complex subunit 3	11	TRUE	FALSE	NA	NA	TRUE
+NTRK3	neurotrophic tyrosine kinase, receptor, type 3	11	TRUE	FALSE	NA	NA	TRUE
+PRKAR1A	protein kinase, cAMP-dependent, regulatory, type I, alpha (tissue specific extinguisher 1)	11	TRUE	FALSE	NA	NA	TRUE
+PTEN	phosphatase and tensin homolog gene	11	TRUE	FALSE	NA	NA	TRUE
+KDM5A	lysine (K)-specific demethylase 5A, JARID1A	11	FALSE	FALSE	NA	NA	FALSE
+SS18	synovial sarcoma translocation, chromosome 18	11	FALSE	TRUE	CNVs	Secrier et al. 2016	TRUE
+STK11	serine/threonine kinase 11 gene (LKB1)	11	TRUE	FALSE	NA	NA	TRUE
+TPM3	tropomyosin 3	11	FALSE	FALSE	NA	NA	FALSE
+ZMYM2	-	11	TRUE	FALSE	NA	NA	TRUE
+HMGA2	high mobility group AT-hook 2 (HMGIC)	11	FALSE	FALSE	NA	NA	FALSE
+PICALM	phosphatidylinositol binding clathrin assembly protein (CALM)	11	TRUE	FALSE	NA	NA	TRUE
+MLLT11	myeloid/lymphoid or mixed-lineage leukemia (trithorax homolog, Drosophila); translocated to, 11	11	FALSE	FALSE	NA	NA	FALSE
+KAT6B	K(lysine) acetyltransferase 6B	11	FALSE	FALSE	NA	NA	FALSE
+BCL11A	B-cell CLL/lymphoma 11A	11	FALSE	FALSE	NA	NA	FALSE
+ZNF331	zinc finger protein 331	11	FALSE	FALSE	NA	NA	FALSE
+MAML2	mastermind-like 2 (Drosophila)	11	TRUE	FALSE	NA	NA	TRUE
+SPECC1	sperm antigen with calponin homology and coiled-coil domains 1	11	TRUE	FALSE	NA	NA	TRUE
+ARID2	AT rich interactive domain 2	11	TRUE	TRUE	Mutations	Dulak et al., 2013	TRUE
+DDX10	DEAD (Asp-Glu-Ala-Asp) box polypeptide 10	10	TRUE	FALSE	NA	NA	TRUE
+ETV4	ets variant gene 4 (E1A enhancer binding protein, E1AF)	10	FALSE	FALSE	NA	NA	FALSE
+LPP	LIM domain containing preferred translocation partner in lipoma	10	FALSE	FALSE	NA	NA	FALSE
+MLLT3	myeloid/lymphoid or mixed-lineage leukemia (trithorax homolog, Drosophila); translocated to, 3 (AF9)	10	TRUE	TRUE	CNVs	Secrier et al. 2016	TRUE
+MYH11	myosin, heavy polypeptide 11, smooth muscle	10	FALSE	FALSE	NA	NA	FALSE
+WIF1	WNT inhibitory factor 1	10	FALSE	FALSE	NA	NA	FALSE
+CIC	capicua homolog	10	TRUE	FALSE	NA	NA	TRUE
+HEY1	hairy/enhancer-of-split related with YRPW motif 1	10	FALSE	FALSE	NA	NA	FALSE
+IL21R	interleukin 21 receptor	10	FALSE	FALSE	NA	NA	FALSE
+RNF43	ring finger protein 43	10	TRUE	FALSE	NA	NA	TRUE
+FBXW7	F-box and WD-40 domain protein 7 (archipelago homolog, Drosophila)	10	TRUE	FALSE	NA	NA	TRUE
+MSI2	musashi homolog 2 (Drosophila)	10	FALSE	FALSE	NA	NA	FALSE
+ALK	anaplastic lymphoma kinase (Ki-1)	9	TRUE	FALSE	NA	NA	TRUE
+BIRC3	baculoviral IAP repeat-containing 3	9	TRUE	FALSE	NA	NA	TRUE
+DDB2	damage-specific DNA binding protein 2	9	FALSE	FALSE	NA	NA	FALSE
+DNM2	dynamin 2	9	TRUE	FALSE	NA	NA	TRUE
+EBF1	early B-cell factor 1	9	TRUE	FALSE	NA	NA	TRUE
+EP300	300 kd E1A-Binding protein gene	9	TRUE	FALSE	NA	NA	TRUE
+ETV1	ets variant gene 1	9	FALSE	FALSE	NA	NA	FALSE
+STAT3	signal transducer and activator of transcription 3 (acute-phase response factor)	9	TRUE	TRUE	CNVs	Secrier et al. 2016	TRUE
+KDM6A	lysine (K)-specific demethylase 6A, UTX	9	TRUE	FALSE	NA	NA	TRUE
+YWHAE	tyrosine 3-monooxygenase/tryptophan 5-monooxygenase activation protein, epsilon polypeptide (14-3-3 epsilon)	9	FALSE	FALSE	NA	NA	FALSE
+THRAP3	thyroid hormone receptor associated protein 3 (TRAP150)	9	FALSE	FALSE	NA	NA	FALSE
+NCOA2	nuclear receptor coactivator 2 (TIF2)	9	FALSE	FALSE	NA	NA	FALSE
+SF3B1	splicing factor 3b, subunit 1, 155kDa	9	TRUE	FALSE	NA	NA	TRUE
+FOXP1	forkhead box P1	9	FALSE	FALSE	NA	NA	FALSE
+TFPT	TCF3 (E2A) fusion partner (in childhood leukaemia)	9	FALSE	FALSE	NA	NA	FALSE
+NIN	ninein (GSK3B interacting protein)	9	FALSE	FALSE	NA	NA	FALSE
+PRDM16	PR domain containing 16	9	FALSE	FALSE	NA	NA	FALSE
+CRTC3	CREB regulated transcription coactivator 3	9	FALSE	FALSE	NA	NA	FALSE
+FIP1L1	FIP1 like 1 (S. cerevisiae)	9	FALSE	FALSE	NA	NA	FALSE
+CREB3L1	cAMP responsive element binding protein 3-like 1	9	FALSE	FALSE	NA	NA	FALSE
+ZNF384	zinc finger protein 384 (CIZ/NMP4)	9	FALSE	FALSE	NA	NA	FALSE
+JAZF1	juxtaposed with another zinc finger gene 1	9	FALSE	FALSE	NA	NA	FALSE
+TNFRSF17	tumor necrosis factor receptor superfamily, member 17	8	FALSE	FALSE	NA	NA	FALSE
+BRCA1	familial breast/ovarian cancer gene 1	8	TRUE	FALSE	NA	NA	TRUE
+BRAF	v-raf murine sarcoma viral O homolog B1	8	TRUE	FALSE	NA	NA	TRUE
+CD79A	CD79a molecule, immunoglobulin-associated alpha	8	TRUE	FALSE	NA	NA	TRUE
+CDH1	cadherin 1, type 1, E-cadherin (epithelial) (ECAD)	8	TRUE	FALSE	NA	NA	TRUE
+CLTC	clathrin, heavy polypeptide (Hc)	8	FALSE	FALSE	NA	NA	FALSE
+CREBBP	CREB binding protein (CBP)	8	TRUE	FALSE	NA	NA	TRUE
+DAXX	death-domain associated protein	8	TRUE	FALSE	NA	NA	TRUE
+KIF5B	kinesin family member 5B	8	FALSE	FALSE	NA	NA	FALSE
+MLLT4	myeloid/lymphoid or mixed-lineage leukemia (trithorax homolog, Drosophila); translocated to, 4 (AF6)	8	FALSE	FALSE	NA	NA	FALSE
+MSH2	mutS homolog 2 (E. coli)	8	TRUE	FALSE	NA	NA	TRUE
+MYB	v-myb myeloblastosis viral O homolog	8	TRUE	TRUE	Amplification	Ross-Ines et al., 2015	TRUE
+PBX1	pre-B-cell leukemia transcription factor 1	8	FALSE	FALSE	NA	NA	FALSE
+PIM1	pim-1 O	8	TRUE	FALSE	NA	NA	TRUE
+RET	ret proto-O	8	TRUE	FALSE	NA	NA	TRUE
+MAP2K4	mitogen-activated protein kinase kinase 4	8	TRUE	FALSE	NA	NA	TRUE
+SOX2	SRY (sex determining region Y)-box 2	8	TRUE	TRUE	Amplification	TCGA, 2017	TRUE
+STAT5B	signal transducer and activator of transcription 5B	8	TRUE	TRUE	CNVs	Secrier et al. 2016	TRUE
+HIST1H4I	histone 1, H4i (H4FM)	8	FALSE	FALSE	NA	NA	FALSE
+GPHN	gephyrin (GPH)	8	FALSE	FALSE	NA	NA	FALSE
+ARHGEF12	RHO guanine nucleotide exchange factor (GEF) 12 (LARG)	8	FALSE	FALSE	NA	NA	FALSE
+MKL1	megakaryoblastic leukemia (translocation) 1	8	FALSE	FALSE	NA	NA	FALSE
+CCND2	cyclin D2	7	TRUE	FALSE	NA	NA	TRUE
+COL1A1	collagen, type I, alpha 1	7	FALSE	FALSE	NA	NA	FALSE
+CTNNB1	catenin (cadherin-associated protein), beta 1	7	TRUE	TRUE	Mutations	Dulak et al., 2013	TRUE
+FANCD2	Fanconi anemia, complementation group D2	7	FALSE	FALSE	NA	NA	FALSE
+FLI1	Friend leukemia virus integration 1	7	FALSE	FALSE	NA	NA	FALSE
+FUS	fusion, derived from t(12;16) malignant liposarcoma	7	FALSE	FALSE	NA	NA	FALSE
+GATA3	GATA binding protein 3	7	TRUE	FALSE	NA	NA	TRUE
+HOXA11	homeo box A11	7	FALSE	FALSE	NA	NA	FALSE
+HSP90AA1	heat shock protein 90kDa alpha (cytosolic), class A member 1	7	FALSE	FALSE	NA	NA	FALSE
+IDH2	isocitrate dehydrogenase 2 (NADP+), mitochondrial	7	TRUE	FALSE	NA	NA	TRUE
+MYCL	v-myc avian myelocytomatosis viral O lung carcinoma derived homolog	7	TRUE	FALSE	NA	NA	TRUE
+MYH9	myosin, heavy polypeptide 9, non-muscle	7	FALSE	FALSE	NA	NA	FALSE
+NFIB	nuclear factor I/B	7	FALSE	FALSE	NA	NA	FALSE
+NTRK1	neurotrophic tyrosine kinase, receptor, type 1	7	TRUE	FALSE	NA	NA	TRUE
+PPP2R1A	protein phosphatase 2, regulatory subunit A, alpha	7	TRUE	FALSE	NA	NA	TRUE
+PRCC	papillary renal cell carcinoma (translocation-associated)	7	FALSE	FALSE	NA	NA	FALSE
+PTPRC	protein tyrosine phosphatase, receptor type, C	7	TRUE	FALSE	NA	NA	TRUE
+ROS1	v-ros UR2 sarcoma virus O homolog 1 (avian)	7	TRUE	FALSE	NA	NA	TRUE
+TMPRSS2	transmembrane protease, serine 2	7	TRUE	FALSE	NA	NA	TRUE
+TPM4	tropomyosin 4	7	FALSE	FALSE	NA	NA	FALSE
+MLLT10	myeloid/lymphoid or mixed-lineage leukemia (trithorax homolog, Drosophila); translocated to, 10 (AF10)	7	FALSE	FALSE	NA	NA	FALSE
+HIST1H3B	histone cluster 1, H3b	7	TRUE	FALSE	NA	NA	TRUE
+RABEP1	rabaptin, RAB GTPase binding effector protein 1	7	FALSE	FALSE	NA	NA	FALSE
+SEPT9	septin 9	7	TRUE	FALSE	NA	NA	TRUE
+SUZ12	suppressor of zeste 12 homolog (Drosophila)	7	TRUE	FALSE	NA	NA	TRUE
+SETD2	SET domain containing 2	7	TRUE	FALSE	NA	NA	TRUE
+TRIM33	tripartite motif-containing 33 (PTC7,TIF1G)	7	FALSE	FALSE	NA	NA	FALSE
+NSD1	nuclear receptor binding SET domain protein 1	7	TRUE	FALSE	NA	NA	TRUE
+TBL1XR1	transducin (beta)-like 1 X-linked receptor 1	7	TRUE	FALSE	NA	NA	TRUE
+NUTM2B	NUT family member 2B	7	FALSE	FALSE	NA	NA	FALSE
+ATP2B3	ATPase, Ca++ transporting, plasma membrane 3	6	FALSE	FALSE	NA	NA	FALSE
+ATRX	alpha thalassemia/mental retardation syndrome X-linked	6	TRUE	FALSE	NA	NA	TRUE
+CACNA1D	calcium channel, voltage-dependent, L type, alpha 1D subunit	6	TRUE	FALSE	NA	NA	TRUE
+CASP8	caspase 8, apoptosis-related cysteine peptidase	6	TRUE	FALSE	NA	NA	TRUE
+KLF6	Kruppel-like factor 6	6	TRUE	FALSE	NA	NA	TRUE
+DDX6	DEAD (Asp-Glu-Ala-Asp) box polypeptide 6	6	FALSE	FALSE	NA	NA	FALSE
+EIF4A2	eukaryotic translation initiation factor 4A, isoform 2	6	FALSE	FALSE	NA	NA	FALSE
+ERCC5	excision repair cross-complementing rodent repair deficiency, complementation group 5 (xeroderma pigmentosum, complementation group G (Cockayne syndrome))	6	FALSE	FALSE	NA	NA	FALSE
+ETV5	ets variant gene 5	6	FALSE	FALSE	NA	NA	FALSE
+EXT2	multiple exostoses type 2 gene	6	TRUE	FALSE	NA	NA	TRUE
+EZH2	enhancer of zeste homolog 2	6	TRUE	FALSE	NA	NA	TRUE
+HOXA9	homeo box A9	6	FALSE	FALSE	NA	NA	FALSE
+HOXA13	homeo box A13	6	FALSE	FALSE	NA	NA	FALSE
+HRAS	v-Ha-ras Harvey rat sarcoma viral O homolog	6	TRUE	FALSE	NA	NA	TRUE
+JAK1	Janus kinase 1	6	TRUE	FALSE	NA	NA	TRUE
+LCK	lymphocyte-specific protein tyrosine kinase	6	FALSE	FALSE	NA	NA	FALSE
+AFF1	AF4/FMR2 family, member 1	6	FALSE	FALSE	NA	NA	FALSE
+MTCP1	mature T-cell proliferation 1	6	FALSE	FALSE	NA	NA	FALSE
+NOTCH2	Notch homolog 2	6	TRUE	FALSE	NA	NA	TRUE
+PDGFRA	platelet-derived growth factor, alpha-receptor	6	TRUE	FALSE	NA	NA	TRUE
+PMS2	PMS2 postmeiotic segregation increased 2 (S. cerevisiae)	6	FALSE	FALSE	NA	NA	FALSE
+PRRX1	paired related homeobox 1	6	FALSE	FALSE	NA	NA	FALSE
+PTCH1	Homolog of Drosophila Patched gene	6	TRUE	FALSE	NA	NA	TRUE
+TRIM27	tripartite motif-containing 27	6	FALSE	FALSE	NA	NA	FALSE
+SDHC	succinate dehydrogenase complex, subunit C, integral membrane protein, 15kDa	6	FALSE	FALSE	NA	NA	FALSE
+TNFAIP3	tumor necrosis factor, alpha-induced protein 3	6	TRUE	FALSE	NA	NA	TRUE
+TPR	translocated promoter region	6	FALSE	FALSE	NA	NA	FALSE
+DEK	DEK O (DNA binding)	6	FALSE	FALSE	NA	NA	FALSE
+KMT2D	lysine (K)-specific methyltransferase 2D	6	TRUE	FALSE	NA	NA	TRUE
+NCOA1	nuclear receptor coactivator 1	6	FALSE	FALSE	NA	NA	FALSE
+SOCS1	suppressor of cytokine signaling 1	6	TRUE	FALSE	NA	NA	TRUE
+CNTRL	centriolin	6	FALSE	FALSE	NA	NA	FALSE
+DICER1	dicer 1, ribonuclease type III	6	TRUE	FALSE	NA	NA	TRUE
+BRD4	bromodomain containing 4	6	FALSE	FALSE	NA	NA	FALSE
+KIAA1549	KIAA1549	6	FALSE	FALSE	NA	NA	FALSE
+CCNB1IP1	cyclin B1 interacting protein 1, E3 ubiquitin protein ligase	6	FALSE	FALSE	NA	NA	FALSE
+RANBP17	RAN binding protein 17	6	FALSE	FALSE	NA	NA	FALSE
+BRIP1	BRCA1 interacting protein C-terminal helicase 1	6	TRUE	FALSE	NA	NA	TRUE
+CARD11	caspase recruitment domain family, member 11	6	TRUE	FALSE	NA	NA	TRUE
+RMI2	RecQ mediated genome instability 2	6	FALSE	FALSE	NA	NA	FALSE
+LRIG3	leucine-rich repeats and immunoglobulin-like domains 3	6	FALSE	FALSE	NA	NA	FALSE
+ECT2L	epithelial cell transforming sequence 2 O-like	6	TRUE	FALSE	NA	NA	TRUE
+ATP1A1	ATPase, Na+/K+ transporting, alpha 1 polypeptide	5	TRUE	FALSE	NA	NA	TRUE
+BCL6	B-cell CLL/lymphoma 6	5	TRUE	FALSE	NA	NA	TRUE
+BCL9	B-cell CLL/lymphoma 9	5	FALSE	FALSE	NA	NA	FALSE
+BMPR1A	bone morphogenetic protein receptor, type IA	5	FALSE	FALSE	NA	NA	FALSE
+CHN1	-	5	FALSE	FALSE	NA	NA	FALSE
+FCGR2B	Fc fragment of IgG, low affinity IIb, receptor for (CD32)	5	FALSE	FALSE	NA	NA	FALSE
+FH	fumarate hydratase	5	TRUE	FALSE	NA	NA	TRUE
+HLF	hepatic leukemia factor	5	FALSE	FALSE	NA	NA	FALSE
+HNRNPA2B1	heterogeneous nuclear ribonucleoprotein A2/B1	5	TRUE	FALSE	NA	NA	TRUE
+KCNJ5	potassium inwardly-rectifying channel; subfamily J; member 5	5	TRUE	FALSE	NA	NA	TRUE
+KLK2	kallikrein-related peptidase 2	5	FALSE	FALSE	NA	NA	FALSE
+KTN1	kinectin 1 (kinesin receptor)	5	FALSE	FALSE	NA	NA	FALSE
+MEN1	multiple endocrine neoplasia type 1 gene	5	TRUE	FALSE	NA	NA	TRUE
+CIITA	class II, major histocompatibility complex, transactivator	5	TRUE	FALSE	NA	NA	TRUE
+MPL	myeloproliferative leukaemia virus O, thrombopoietin receptor	5	TRUE	FALSE	NA	NA	TRUE
+MSN	moesin	5	FALSE	FALSE	NA	NA	FALSE
+NRAS	neuroblastoma RAS viral (v-ras) O homolog	5	TRUE	FALSE	NA	NA	TRUE
+NUP98	nucleoporin 98kDa	5	FALSE	FALSE	NA	NA	FALSE
+PAFAH1B2	platelet-activating factor acetylhydrolase, isoform Ib, beta subunit 30kDa	5	FALSE	FALSE	NA	NA	FALSE
+PLAG1	pleiomorphic adenoma gene 1	5	FALSE	FALSE	NA	NA	FALSE
+SMARCB1	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily b, member 1	5	TRUE	FALSE	NA	NA	TRUE
+TCEA1	transcription elongation factor A (SII), 1	5	FALSE	FALSE	NA	NA	FALSE
+HNF1A	HNF1 homeobox A	5	TRUE	FALSE	NA	NA	TRUE
+TCF12	transcription factor 12 (HTF4, helix-loop-helix transcription factors 4)	5	TRUE	FALSE	NA	NA	TRUE
+TFRC	transferrin receptor (p90, CD71)	5	FALSE	FALSE	NA	NA	FALSE
+NKX2-1	NK2 homeobox 1	5	TRUE	FALSE	NA	NA	TRUE
+VHL	von Hippel-Lindau syndrome gene	5	TRUE	FALSE	NA	NA	TRUE
+BRD3	bromodomain containing 3	5	TRUE	FALSE	NA	NA	TRUE
+NUP214	nucleoporin 214kDa (CAN)	5	FALSE	FALSE	NA	NA	FALSE
+GAS7	growth arrest-specific 7	5	FALSE	FALSE	NA	NA	FALSE
+TNFRSF14	tumor necrosis factor receptor superfamily, member 14 (herpesvirus entry mediator)	5	TRUE	FALSE	NA	NA	TRUE
+PCSK7	proprotein convertase subtilisin/kexin type 7	5	FALSE	FALSE	NA	NA	FALSE
+PDE4DIP	phosphodiesterase 4D interacting protein (myomegalin)	5	FALSE	FALSE	NA	NA	FALSE
+ABI1	abl-interactor 1	5	FALSE	FALSE	NA	NA	FALSE
+ARHGAP26	Rho GTPase activating protein 26	5	TRUE	FALSE	NA	NA	TRUE
+GOPC	golgi associated PDZ and coiled-coil motif containing	5	TRUE	FALSE	NA	NA	TRUE
+RNF213	ring finger protein 213	5	FALSE	FALSE	NA	NA	FALSE
+CHCHD7	coiled-coil-helix-coiled-coil-helix domain containing 7	5	FALSE	FALSE	NA	NA	FALSE
+PALB2	partner and localizer of BRCA2	5	TRUE	FALSE	NA	NA	TRUE
+FBXO11	F-box protein 11	5	TRUE	FALSE	NA	NA	TRUE
+ABL1	v-abl Abelson murine leukemia viral O homolog 1	4	TRUE	FALSE	NA	NA	TRUE
+FAS	Fas cell surface death receptor	4	TRUE	FALSE	NA	NA	TRUE
+BCL7A	B-cell CLL/lymphoma 7A	4	FALSE	FALSE	NA	NA	FALSE
+BCR	breakpoint cluster region	4	TRUE	FALSE	NA	NA	TRUE
+CBFA2T3	core-binding factor, runt domain, alpha subunit 2; translocated to, 3 (MTG-16)	4	FALSE	FALSE	NA	NA	FALSE
+CSF3R	colony stimulating factor 3 receptor (granulocyte)	4	TRUE	FALSE	NA	NA	TRUE
+ERCC4	excision repair cross-complementing rodent repair deficiency, complementation group 4	4	FALSE	FALSE	NA	NA	FALSE
+ACSL3	acyl-CoA synthetase long-chain family member 3	4	FALSE	FALSE	NA	NA	FALSE
+FGFR3	fibroblast growth factor receptor 3	4	TRUE	FALSE	NA	NA	TRUE
+GPC3	glypican 3	4	FALSE	FALSE	NA	NA	FALSE
+HMGA1	high mobility group AT-hook 1	4	FALSE	FALSE	NA	NA	FALSE
+FOXA1	forkhead box A1	4	TRUE	FALSE	NA	NA	TRUE
+MAX	Myc associated factor X	4	TRUE	FALSE	NA	NA	TRUE
+MDM4	Mdm4 p53 binding protein homolog	4	TRUE	FALSE	NA	NA	TRUE
+MITF	microphthalmia-associated transcription factor	4	TRUE	FALSE	NA	NA	TRUE
+NFE2L2	nuclear factor (erythroid-derived 2)-like 2 (NRF2)	4	TRUE	FALSE	NA	NA	TRUE
+PCM1	pericentriolar material 1  (PTC4)	4	FALSE	FALSE	NA	NA	FALSE
+PDGFRB	platelet-derived growth factor receptor, beta polypeptide	4	TRUE	FALSE	NA	NA	TRUE
+PIK3R1	phosphoinositide-3-kinase, regulatory subunit 1 (alpha)	4	TRUE	FALSE	NA	NA	TRUE
+RAC1	ras-related C3 botulinum toxin substrate 1 (rho family, small GTP binding protein Rac1)	4	TRUE	FALSE	NA	NA	TRUE
+RALGDS	ral guanine nucleotide dissociation stimulator	4	FALSE	FALSE	NA	NA	FALSE
+RPL22	ribosomal protein L22 (EAP)	4	TRUE	FALSE	NA	NA	TRUE
+TCF3	transcription factor 3 (E2A immunoglobulin enhancer binding factors E12/E47)	4	FALSE	FALSE	NA	NA	FALSE
+TSC2	tuberous sclerosis 2 gene	4	TRUE	FALSE	NA	NA	TRUE
+WHSC1	Wolf-Hirschhorn syndrome candidate 1(MMSET)	4	TRUE	FALSE	NA	NA	TRUE
+WRN	Werner syndrome (RECQL2)	4	FALSE	FALSE	NA	NA	FALSE
+XPC	xeroderma pigmentosum, complementation group C	4	FALSE	FALSE	NA	NA	FALSE
+ZBTB16	zinc finger and BTB domain containing 16	4	TRUE	FALSE	NA	NA	TRUE
+ELL	ELL gene (11-19 lysine-rich leukemia gene)	4	FALSE	FALSE	NA	NA	FALSE
+CLTCL1	clathrin, heavy polypeptide-like 1	4	FALSE	FALSE	NA	NA	FALSE
+AXIN1	axin 1	4	TRUE	FALSE	NA	NA	TRUE
+TRIP11	thyroid hormone receptor interactor 11	4	FALSE	FALSE	NA	NA	FALSE
+OLIG2	oligodendrocyte lineage transcription factor 2 (BHLHB1)	4	FALSE	FALSE	NA	NA	FALSE
+CHEK2	CHK2 checkpoint homolog (S. pombe)	4	TRUE	FALSE	NA	NA	TRUE
+FNBP1	formin binding protein 1 (FBP17)	4	FALSE	FALSE	NA	NA	FALSE
+ACSL6	acyl-CoA synthetase long-chain family member 6	4	FALSE	FALSE	NA	NA	FALSE
+CRTC1	CREB regulated transcription coactivator 1	4	TRUE	FALSE	NA	NA	TRUE
+EML4	echinoderm microtubule associated protein like 4	4	FALSE	FALSE	NA	NA	FALSE
+TET2	tet O family member 2	4	TRUE	FALSE	NA	NA	TRUE
+CDC73	cell division cycle 73	4	TRUE	FALSE	NA	NA	TRUE
+TET1	tet methylcytosine dioxygenase 1	4	TRUE	FALSE	NA	NA	TRUE
+SLC45A3	solute carrier family 45, member 3	4	FALSE	FALSE	NA	NA	FALSE
+TTL	tubulin tyrosine ligase	4	FALSE	FALSE	NA	NA	FALSE
+FLCN	folliculin	4	FALSE	FALSE	NA	NA	FALSE
+ABL2	c-abl O 2, non-receptor tyrosine kinase	3	FALSE	FALSE	NA	NA	FALSE
+ALDH2	aldehyde dehydrogenase 2 family (mitochondrial)	3	FALSE	FALSE	NA	NA	FALSE
+ATF1	activating transcription factor 1	3	FALSE	FALSE	NA	NA	FALSE
+ATIC	5-aminoimidazole-4-carboxamide ribonucleotide formyltransferase/IMP cyclohydrolase	3	FALSE	FALSE	NA	NA	FALSE
+CALR	calreticulin	3	TRUE	FALSE	NA	NA	TRUE
+CBLB	Cas-Br-M (murine) ecotropic retroviral transforming sequence b	3	TRUE	FALSE	NA	NA	TRUE
+CD74	CD74 molecule, major histocompatibility complex, class II invariant chain	3	FALSE	FALSE	NA	NA	FALSE
+CD79B	CD79b molecule, immunoglobulin-associated beta	3	TRUE	FALSE	NA	NA	TRUE
+DDIT3	DNA-damage-inducible transcript 3	3	FALSE	FALSE	NA	NA	FALSE
+ELK4	ELK4, ETS-domain protein (SRF accessory protein 1)	3	FALSE	FALSE	NA	NA	FALSE
+EPS15	epidermal growth factor receptor pathway substrate 15 (AF1p)	3	FALSE	FALSE	NA	NA	FALSE
+ERG	v-ets erythroblastosis virus E26 O like (avian)	3	TRUE	FALSE	NA	NA	TRUE
+FANCA	Fanconi anemia, complementation group A	3	TRUE	FALSE	NA	NA	TRUE
+FANCC	Fanconi anemia, complementation group C	3	FALSE	FALSE	NA	NA	FALSE
+MNX1	motor neuron and pancreas homeobox 1	3	FALSE	FALSE	NA	NA	FALSE
+IL6ST	interleukin 6 signal transducer (gp130, oncostatin M receptor)	3	FALSE	FALSE	NA	NA	FALSE
+IRF4	interferon regulatory factor 4	3	TRUE	FALSE	NA	NA	TRUE
+ITK	IL2-inducible T-cell kinase	3	TRUE	FALSE	NA	NA	TRUE
+JAK3	Janus kinase 3	3	TRUE	FALSE	NA	NA	TRUE
+KIT	v-kit Hardy-Zuckerman 4 feline sarcoma viral O homolog	3	TRUE	FALSE	NA	NA	TRUE
+LMO2	LIM domain only 2 (rhombotin-like 1) (RBTN2)	3	FALSE	FALSE	NA	NA	FALSE
+MLH1	E.coli MutL homolog gene	3	TRUE	FALSE	NA	NA	TRUE
+MN1	meningioma (disrupted in balanced translocation) 1	3	FALSE	FALSE	NA	NA	FALSE
+PAX7	paired box gene 7	3	FALSE	FALSE	NA	NA	FALSE
+PMS1	PMS1 postmeiotic segregation increased 1 (S. cerevisiae)	3	TRUE	FALSE	NA	NA	TRUE
+MAP2K1	mitogen-activated protein kinase kinase 1	3	TRUE	FALSE	NA	NA	TRUE
+RAP1GDS1	RAP1, GTP-GDP dissociation stimulator 1	3	FALSE	FALSE	NA	NA	FALSE
+SET	SET translocation	3	FALSE	FALSE	NA	NA	FALSE
+SRSF2	serine/arginine-rich splicing factor 2	3	TRUE	FALSE	NA	NA	TRUE
+SH3GL1	SH3-domain GRB2-like 1 (EEN)	3	FALSE	FALSE	NA	NA	FALSE
+SMO	smoothened homolog (Drosophila)	3	TRUE	FALSE	NA	NA	TRUE
+TCF7L2	transcription factor 7-like 2	3	TRUE	FALSE	NA	NA	TRUE
+TSC1	tuberous sclerosis 1 gene	3	TRUE	FALSE	NA	NA	TRUE
+TSHR	thyroid stimulating hormone receptor	3	TRUE	FALSE	NA	NA	TRUE
+WT1	Wilms tumour 1 gene	3	TRUE	FALSE	NA	NA	TRUE
+PAX8	paired box gene 8	3	FALSE	FALSE	NA	NA	FALSE
+TAF15	TAF15 RNA polymerase II, TATA box binding protein (TBP)-associated factor, 68kDa	3	FALSE	TRUE	CNVs	Secrier et al. 2016	TRUE
+BAP1	BRCA1 associated protein-1 (ubiquitin carboxy-terminal hydrolase)	3	TRUE	FALSE	NA	NA	TRUE
+TRIM24	tripartite motif containing 24	3	FALSE	FALSE	NA	NA	FALSE
+GMPS	guanine monphosphate synthetase	3	FALSE	FALSE	NA	NA	FALSE
+PHOX2B	paired-like homeobox 2b	3	TRUE	FALSE	NA	NA	TRUE
+MED12	mediator complex subunit 12	3	TRUE	FALSE	NA	NA	TRUE
+FSTL3	follistatin-like 3 (secreted glycoprotein)	3	FALSE	FALSE	NA	NA	FALSE
+PSIP1	PC4 and SFRS1 interacting protein 1 (LEDGF)	3	FALSE	FALSE	NA	NA	FALSE
+NT5C2	5'-nucleotidase, cytosolic II	3	TRUE	FALSE	NA	NA	TRUE
+CD274	CD274 molecule	3	FALSE	FALSE	NA	NA	FALSE
+SUFU	suppressor of fused homolog (Drosophila)	3	TRUE	FALSE	NA	NA	TRUE
+PDCD1LG2	programmed cell death 1 ligand 2	3	FALSE	FALSE	NA	NA	FALSE
+TRAF7	tumour necrosis factor receptor-associated factor 7	3	TRUE	FALSE	NA	NA	TRUE
+CANT1	calcium activated nucleotidase 1	3	FALSE	FALSE	NA	NA	FALSE
+FOXL2	forkhead box L2	2	TRUE	FALSE	NA	NA	TRUE
+CARS	cysteinyl-tRNA synthetase	2	FALSE	FALSE	NA	NA	FALSE
+CDK4	cyclin-dependent kinase 4	2	TRUE	FALSE	NA	NA	TRUE
+CDKN2C	cyclin-dependent kinase inhibitor 2C (p18, inhibits CDK4)	2	TRUE	FALSE	NA	NA	TRUE
+CYLD	familial cylindromatosis gene	2	TRUE	FALSE	NA	NA	TRUE
+DDX5	DEAD (Asp-Glu-Ala-Asp) box polypeptide 5	2	FALSE	FALSE	NA	NA	FALSE
+ERCC3	excision repair cross-complementing rodent repair deficiency, complementation group 3 (xeroderma pigmentosum group B complementing)	2	FALSE	FALSE	NA	NA	FALSE
+FANCE	Fanconi anemia, complementation group E	2	FALSE	FALSE	NA	NA	FALSE
+FANCF	Fanconi anemia, complementation group F	2	FALSE	FALSE	NA	NA	FALSE
+GNA11	guanine nucleotide binding protein (G protein), alpha 11 (Gq class)	2	TRUE	FALSE	NA	NA	TRUE
+H3F3A	H3 histone, family 3A	2	TRUE	FALSE	NA	NA	TRUE
+HOXC11	homeo box C11	2	FALSE	FALSE	NA	NA	FALSE
+HOXD13	homeo box D13	2	FALSE	FALSE	NA	NA	FALSE
+IDH1	isocitrate dehydrogenase 1 (NADP+), soluble	2	TRUE	FALSE	NA	NA	TRUE
+JAK2	Janus kinase 2	2	TRUE	FALSE	NA	NA	TRUE
+MLF1	myeloid leukemia factor 1	2	FALSE	FALSE	NA	NA	FALSE
+MUTYH	mutY homolog (E. coli)	2	FALSE	FALSE	NA	NA	FALSE
+NACA	nascent-polypeptide-associated complex alpha polypeptide	2	FALSE	FALSE	NA	NA	FALSE
+NF2	neurofibromatosis type 2 gene	2	TRUE	FALSE	NA	NA	TRUE
+PDGFB	platelet-derived growth factor beta polypeptide (simian sarcoma viral (v-sis) O homolog)	2	FALSE	FALSE	NA	NA	FALSE
+PER1	period homolog 1 (Drosophila)	2	FALSE	FALSE	NA	NA	FALSE
+SEPT5	septin 5	2	FALSE	FALSE	NA	NA	FALSE
+PPARG	peroxisome proliferative activated receptor, gamma	2	FALSE	FALSE	NA	NA	FALSE
+PTPN11	protein tyrosine phosphatase, non-receptor type 11	2	TRUE	FALSE	NA	NA	TRUE
+RAF1	v-raf-1 murine leukemia viral O homolog 1	2	TRUE	FALSE	NA	NA	TRUE
+REL	v-rel reticuloendotheliosis viral O homolog (avian)	2	TRUE	FALSE	NA	NA	TRUE
+RPN1	ribophorin I	2	FALSE	FALSE	NA	NA	FALSE
+SDHB	succinate dehydrogenase complex, subunit B, iron sulfur (Ip)	2	FALSE	FALSE	NA	NA	FALSE
+SFPQ	splicing factor proline/glutamine rich(polypyrimidine tract binding protein associated)	2	TRUE	FALSE	NA	NA	TRUE
+SRSF3	serine/arginine-rich splicing factor 3	2	FALSE	FALSE	NA	NA	FALSE
+STIL	SCL/TAL1 interrupting locus	2	FALSE	FALSE	NA	NA	FALSE
+U2AF1	U2 small nuclear RNA auxiliary factor 1	2	TRUE	FALSE	NA	NA	TRUE
+NR4A3	nuclear receptor subfamily 4, group A, member 3 (NOR1)	2	FALSE	FALSE	NA	NA	FALSE
+CCDC6	coiled-coil domain containing 6	2	FALSE	FALSE	NA	NA	FALSE
+USP6	ubiquitin specific peptidase 6 (Tre-2 O)	2	FALSE	FALSE	NA	NA	FALSE
+KLF4	Kruppel-like factor 4	2	TRUE	FALSE	NA	NA	TRUE
+GOLGA5	golgi autoantigen, golgin subfamily a, 5  (PTC5)	2	FALSE	FALSE	NA	NA	FALSE
+SH2B3	SH2B adaptor protein 3	2	TRUE	FALSE	NA	NA	TRUE
+FGFR1OP	FGFR1 O partner (FOP)	2	FALSE	FALSE	NA	NA	FALSE
+WWTR1	WW domain containing transcription regulator 1	2	FALSE	FALSE	NA	NA	FALSE
+FAM46C	family with sequence similarity 46, member C	2	TRUE	FALSE	NA	NA	TRUE
+BCOR	BCL6 corepressor	2	TRUE	FALSE	NA	NA	TRUE
+FCRL4	Fc receptor-like 4	2	FALSE	FALSE	NA	NA	FALSE
+PHF6	PHD finger protein 6	2	TRUE	FALSE	NA	NA	TRUE
+VTI1A	vesicle transport through interaction with t-SNAREs homolog 1A	2	FALSE	FALSE	NA	NA	FALSE
+NUTM1	NUT midline carcinoma, family member 1	2	FALSE	FALSE	NA	NA	FALSE
+AKT1	v-akt murine thymoma viral O homolog 1	1	TRUE	FALSE	NA	NA	TRUE
+RHOH	ras homolog family member H	1	FALSE	FALSE	NA	NA	FALSE
+PRDM1	PR domain containing 1, with ZNF domain	1	TRUE	FALSE	NA	NA	TRUE
+BTG1	B-cell translocation gene 1, anti-proliferative	1	TRUE	FALSE	NA	NA	TRUE
+BUB1B	BUB1 budding uninhibited by benzimidazoles 1 homolog beta (yeast)	1	FALSE	FALSE	NA	NA	FALSE
+CBFB	core-binding factor, beta subunit	1	TRUE	FALSE	NA	NA	TRUE
+CREB1	cAMP responsive element binding protein 1	1	FALSE	FALSE	NA	NA	FALSE
+DNMT3A	DNA (cytosine-5-)-methyltransferase 3 alpha	1	TRUE	FALSE	NA	NA	TRUE
+EWSR1	Ewing sarcoma breakpoint region 1 (EWS)	1	FALSE	FALSE	NA	NA	FALSE
+GATA2	GATA binding protein 2	1	TRUE	FALSE	NA	NA	TRUE
+GNAQ	guanine nucleotide binding protein (G protein), q polypeptide	1	TRUE	FALSE	NA	NA	TRUE
+HOXC13	homeo box C13	1	FALSE	FALSE	NA	NA	FALSE
+HOXD11	homeo box D11	1	FALSE	FALSE	NA	NA	FALSE
+IL2	interleukin 2	1	FALSE	FALSE	NA	NA	FALSE
+LYL1	lymphoblastic leukemia derived sequence 1	1	FALSE	FALSE	NA	NA	FALSE
+MAF	v-maf musculoaponeurotic fibrosarcoma O homolog	1	FALSE	FALSE	NA	NA	FALSE
+MLLT1	myeloid/lymphoid or mixed-lineage leukemia (trithorax homolog, Drosophila); translocated to, 1 (ENL)	1	FALSE	FALSE	NA	NA	FALSE
+FOXO4	forkhead box O4	1	FALSE	FALSE	NA	NA	FALSE
+MYCN	v-myc myelocytomatosis viral related O, neuroblastoma derived (avian)	1	TRUE	FALSE	NA	NA	TRUE
+MYD88	myeloid differentiation primary response gene (88)	1	TRUE	TRUE	Mutations	Weaver et al., 2014	TRUE
+NFKB2	nuclear factor of kappa light polypeptide gene enhancer in B-cells 2 (p49/p100)	1	FALSE	FALSE	NA	NA	FALSE
+NONO	non-POU domain containing, octamer-binding	1	FALSE	FALSE	NA	NA	FALSE
+NPM1	nucleophosmin (nucleolar phosphoprotein B23, numatrin)	1	TRUE	FALSE	NA	NA	TRUE
+PAX3	paired box gene 3	1	FALSE	FALSE	NA	NA	FALSE
+PML	promyelocytic leukemia	1	FALSE	FALSE	NA	NA	FALSE
+POU2AF1	POU domain, class 2, associating factor 1 (OBF1)	1	FALSE	FALSE	NA	NA	FALSE
+PRF1	perforin 1 (pore forming protein)	1	FALSE	FALSE	NA	NA	FALSE
+RPL10	ribosomal protein L10	1	TRUE	FALSE	NA	NA	TRUE
+SDHD	succinate dehydrogenase complex, subunit D, integral membrane protein	1	FALSE	FALSE	NA	NA	FALSE
+TAL1	T-cell acute lymphocytic leukemia 1 (SCL)	1	FALSE	FALSE	NA	NA	FALSE
+EZR	ezrin	1	FALSE	FALSE	NA	NA	FALSE
+XPA	xeroderma pigmentosum, complementation group A	1	FALSE	FALSE	NA	NA	FALSE
+XPO1	exportin 1 (CRM1 homolog, yeast)	1	TRUE	FALSE	NA	NA	TRUE
+CNBP	CCHC-type zinc finger, nucleic acid binding protein	1	FALSE	FALSE	NA	NA	FALSE
+ZRSR2	zinc finger (CCCH type), RNA-binding motif and serine/arginine rich 2	1	TRUE	FALSE	NA	NA	TRUE
+KDM5C	lysine (K)-specific demethylase 5C (JARID1C)	1	TRUE	FALSE	NA	NA	TRUE
+FUBP1	far upstream element (FUSE) binding protein 1	1	TRUE	FALSE	NA	NA	TRUE
+HERPUD1	homocysteine-inducible, endoplasmic reticulum stress-inducible, ubiquitin-like domain member 1	1	FALSE	FALSE	NA	NA	FALSE
+TFG	TRK-fused gene	1	FALSE	FALSE	NA	NA	FALSE
+CLP1	cleavage and polyadenylation factor I subunit 1	1	FALSE	FALSE	NA	NA	FALSE
+DUX4L1	double homeobox 4 like 1	1	FALSE	FALSE	NA	NA	FALSE
+SEPT6	septin 6	1	FALSE	FALSE	NA	NA	FALSE
+PATZ1	-	1	FALSE	FALSE	NA	NA	FALSE
+POT1	protection of telomeres 1	1	TRUE	FALSE	NA	NA	TRUE
+CHIC2	cysteine-rich hydrophobic domain 2	1	FALSE	FALSE	NA	NA	FALSE
+AFF4	AF4/FMR2 family, member 4	1	FALSE	FALSE	NA	NA	FALSE
+FEV	FEV protein - (HSRNAFEV)	1	FALSE	FALSE	NA	NA	FALSE
+SDHAF2	succinate dehydrogenase complex assembly factor 2	1	FALSE	FALSE	NA	NA	FALSE
+ACKR3	atypical chemokine receptor 3	1	FALSE	FALSE	NA	NA	FALSE
+CASC5	cancer susceptibility candidate 5	1	FALSE	FALSE	NA	NA	FALSE
+CREB3L2	cAMP responsive element binding protein 3-like 2	1	FALSE	FALSE	NA	NA	FALSE
+RBM15	RNA binding motif protein 15	1	FALSE	FALSE	NA	NA	FALSE
+BCL11B	B-cell CLL/lymphoma 11B  (CTIP2)	1	TRUE	FALSE	NA	NA	TRUE
+ASPSCR1	alveolar soft part sarcoma chromosome region, candidate 1	1	FALSE	FALSE	NA	NA	FALSE
+AMER1	APC membrane recruitment protein 1	1	TRUE	FALSE	NA	NA	TRUE
+C15orf65	chromosome 15 open reading frame 65	1	FALSE	FALSE	NA	NA	FALSE
+NUTM2A	NUT family member 2A	1	FALSE	FALSE	NA	NA	FALSE

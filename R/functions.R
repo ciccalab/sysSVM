@@ -106,6 +106,9 @@ getScaledTable <- function(df, type="cs", models=NULL, scaling.factors=NULL){ #
 ## Create training and prediction sets
 createDescribeTrainingCGC = function(output.dir=NULL, exclude.features=NULL, trainingMode=TRUE, models=NULL, scaling.factors=NULL){
 
+  require(dplyr)
+  require(tidyr)
+
   ## Get data
   d = sysSVM:::oac_data
 
