@@ -42,8 +42,11 @@ syssvm <- function(input.file="example_data/oac_ML_input_formatted.tsv",
     trainingMode = FALSE
   }
 
+<<<<<<< HEAD
   source("R/functions.R")
 
+=======
+>>>>>>> 98311702c6300c778b9739db46e0f98e039270e5
   ## Create training and prediction sets
   createDescribeTrainingCGC(input.file=input.file, output.dir=output.dir, exclude.features=exclude.features,
                             trainingMode=trainingMode, models=models, scaling.factors=scaling.factors)
