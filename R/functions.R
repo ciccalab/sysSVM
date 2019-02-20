@@ -198,6 +198,9 @@ runNoveltyDetection = function(output.dir=NULL, cv=3, iters=100,
                                kernels=c("linear", "polynomial", "radial", "sigmoid"),
                                cores=2){
 
+  require(doSNOW)
+  require(parallel)
+
   ## Constants
   NU = seq(0.05, 0.9, 0.05)
   GAMMA = 2^seq(-7,4)
