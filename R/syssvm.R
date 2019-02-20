@@ -24,7 +24,7 @@
 #'
 #'
 
-syssvm <- function(input.file="example_data/oac_ML_input_formatted.tsv",
+syssvm <- function(input.file="data/oac_ML_input_formatted.tsv",
                    output.dir="OAC", exclude.features=c("young", "no_ALL_muts"),
                    models=NULL,
                    scaling.factors=NULL,
