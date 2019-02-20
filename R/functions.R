@@ -4,9 +4,9 @@
 #############
 
 ## Marking of training/prediction set
-markTrainCGC <- function(df, fp_dir="data/NCG_false_positives.txt",
-                         geneInfo_fn="data/geneInfoNCG5_2.Rdata",
-                         cancerGenes_fn="data/cancerGenesNCG5_2.Rdata"){
+markTrainCGC <- function(df, fp_dir="example_data/NCG_false_positives.txt",
+                         geneInfo_fn="example_data/geneInfoNCG5_2.Rdata",
+                         cancerGenes_fn="example_data/cancerGenesNCG5_2.Rdata"){
 
   load(geneInfo_fn)
   load(cancerGenes_fn)
@@ -867,9 +867,9 @@ plattScaling = function(model, predictions){
 
 ## Reproduce OAC results
 getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL, scores_fn="scores.Rdata",
-                      fp_dir="data/NCG_false_positives.txt",
-                      cgc_fn="data/518_CGC_annotation_2211.xlsx",
-                      previous.studies="data/CGCs_to_be_considered_OAC.tsv",
+                      fp_dir="example_data/NCG_false_positives.txt",
+                      cgc_fn="example_data/518_CGC_annotation_2211.xlsx",
+                      previous.studies="example_data/CGCs_to_be_considered_OAC.tsv",
                       exclude_expr=c("Not Expressed")){
 
   require(readxl)
@@ -880,7 +880,7 @@ getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL, 
 
   ## Get the data we need for the definition of the sys cans
   ## Load geneInfo to get the symbols as well
-  load("data/geneInfoNCG5_2.Rdata")
+  load("example_data/geneInfoNCG5_2.Rdata")
   geneInfoNCG5 = geneInfo %>% select(entrez, symbol) %>% unique
 
   ## Load the CGC that we will consider drivers
@@ -971,7 +971,7 @@ getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL, 
     cat("Expression is considered for the selection of sys cans", "\n")
     ## Load expression data (GTeX)
     cat("Loading GTeX expression data", "\n")
-    load("data/expressionNCG5_gtex.Rdata") ## name of data frame is gtex
+    load("example_data/expressionNCG5_gtex.Rdata") ## name of data frame is gtex
     gtex = gtex %>% select(entrez, tissue, exp_level) %>% spread(tissue, exp_level)
     ## Checkpoint
     if(!(gtex.tissue%in%colnames(gtex))){
@@ -1035,8 +1035,8 @@ scoreGenes = function(ncg.tissue.name=NULL,
   outDir = paste0(output.dir, "/Results/")
   dir.create(outDir) ## Write results in a separate directory
 
-  load("data/geneInfoNCG5_2.Rdata")
-  load("data/cancerGenesNCG5_2.Rdata")
+  load("example_data/geneInfoNCG5_2.Rdata")
+  load("example_data/cancerGenesNCG5_2.Rdata")
 
   ## Check point for NCG tissues
   ncg_tissues = cancerGenes %>% select(primary_site) %>% unique %>% .$primary_site
