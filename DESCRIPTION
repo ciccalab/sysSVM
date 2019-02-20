@@ -19,4 +19,5 @@ Imports:
   e1071 (>= 1.6-8),
   sampling (>= 2.8),
   doSNOW (>= 1.0.16),
+  parallel (>= 3.4.3),
   dplyr (>= 0.7.4)
