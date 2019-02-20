@@ -2,27 +2,11 @@ Package: sysSVM
 Type: Package
 Title: sysSVM
 Version: 0.1.0
-<<<<<<< HEAD
-Author: Thanos Mourikis
-Maintainer: Thanos Mourikis <thmourikis@gmail.com>
-Description: Identify patient-specific cancer drivers using systems biology and support vectors machines.
-License: GPL-3
-=======
 Authors@R: c( person("Thanos", "Mourikis", role = c("aut", "cre"), email = "athanasios.mourikis@kcl.ac.uk"),
               person("Damjan", "Temelkovski", role = c("ctb"), email = "damjan.temelkovski@kcl.ac.uk"))
-Maintainer: Thanos Mourikis <athanasios.mourikis@kcl.ac.uk>
+Maintainer: Thanos Mourikis <thmourikis@gmail.com>
 Description: sysSVM is an algorithm to identify genes that are similar to known cancer genes according to system-level properties of the gene and type/number of alterations in tumours of cancer samples. The algorithm uses machine learning, specifically it uses four support vector machines (SVMs) with four different kernel functions (linear, polynomial, radial, and sigmoid).
-Imports:
-    caret,
-    dplyr,
-    doSNOW,
-    e1071,
-    plyr,
-    readxl,
-    sampling,
-    tidyr
 License: TBD
->>>>>>> 98311702c6300c778b9739db46e0f98e039270e5
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
