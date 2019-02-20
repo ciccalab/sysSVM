@@ -42,7 +42,6 @@ syssvm <- function(input.file="example_data/oac_ML_input_formatted.tsv",
     trainingMode = FALSE
   }
 
-  source("R/dependencies.R")
   source("R/functions.R")
 
   ## Create training and prediction sets
