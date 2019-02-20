@@ -1,6 +1,13 @@
 # sysSVM
 Patient-specific cancer driver prediction using support vector machines and systems biology
 
+### Example data were imported using the following command
+```r
+> install.packages("devtools")
+> library(devtools)
+> devtools::use_data(cgcs, cancerGenes, previous, gtex, geneInfo, geneProperties_mmImputed, false_positive_genes, oac_data, internal = TRUE)
+```
+
 ### Install ### (when it goes public)
 
 ```r

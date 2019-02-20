@@ -4,12 +4,10 @@
 #############
 
 ## Marking of training/prediction set
-markTrainCGC <- function(df, fp_dir="example_data/NCG_false_positives.txt",
-                         geneInfo_fn="example_data/geneInfoNCG5_2.Rdata",
-                         cancerGenes_fn="example_data/cancerGenesNCG5_2.Rdata"){
+markTrainCGC <- function(df){
 
-  load(geneInfo_fn)
-  load(cancerGenes_fn)
+  geneInfo=sySVM:::geneInfo
+  cancerGenes=sysSVM:::cancerGenes
 
   ## Get information for cgc/cans and primary sites
   ## Fix gene info table from NCG
@@ -23,7 +21,7 @@ markTrainCGC <- function(df, fp_dir="example_data/NCG_false_positives.txt",
     rename(gene_type=cancer_type)
 
   ## Get false positive genes
-  false_positive_genes <- read.table(fp_dir, header = T, sep = "\t")
+  false_positive_genes <- sysSVM:::false_positive_genes
   false_positive_genes <- false_positive_genes %>% select(entrez, symbol)
 
   ## Get primary site information for the df
@@ -106,31 +104,30 @@ getScaledTable <- function(df, type="cs", models=NULL, scaling.factors=NULL){ #
 
 
 ## Create training and prediction sets
-createDescribeTrainingCGC = function( input.file=NULL, output.dir=NULL, exclude.features=NULL, trainingMode=TRUE, models=NULL, scaling.factors=NULL){
+createDescribeTrainingCGC = function(output.dir=NULL, exclude.features=NULL, trainingMode=TRUE, models=NULL, scaling.factors=NULL){
 
   ## Get data
-  if(!is.null(input.file)){
-    d = read.table(input.file, sep="\t", header = T)
+  d = sysSVM:::oac_data
 
-    FEATURES = colnames(d)[!colnames(d)%in%exclude.features]
+  FEATURES = colnames(d)[!colnames(d)%in%exclude.features]
 
-    d = d %>% select(one_of(c("sample", "entrez", FEATURES))) %>% data.frame()
-    ## We need to make it factors
-    cat("Converting binary features to factors", "\n")
+  d = d %>% select(one_of(c("sample", "entrez", FEATURES))) %>% data.frame()
+  ## We need to make it factors
+  cat("Converting binary features to factors", "\n")
 
-    ## Get which features have only two levels and onvert them to factors
-    to.be.factors = lapply(d, function(x){
-      length(unique(x))==2
-    })
+  ## Get which features have only two levels and onvert them to factors
+  to.be.factors = lapply(d, function(x){
+    length(unique(x))==2
+  })
 
-    fcols=colnames(d)[unlist(to.be.factors)]
-    fcols = fcols[!fcols%in%c("sample", "entrez")]
+  fcols=colnames(d)[unlist(to.be.factors)]
+  fcols = fcols[!fcols%in%c("sample", "entrez")]
 
-    cols <- which(colnames(d) %in% fcols)
-    for(i in cols){
-      d[,i] = factor(d[,i], levels = c(0,1))
-    }
+  cols <- which(colnames(d) %in% fcols)
+  for(i in cols){
+    d[,i] = factor(d[,i], levels = c(0,1))
   }
+
 
   ## Mark training observations before you scale
   if(trainingMode){
@@ -866,13 +863,9 @@ plattScaling = function(model, predictions){
 }
 
 ## Reproduce OAC results
-getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL, scores_fn="scores.Rdata",
-                      fp_dir="example_data/NCG_false_positives.txt",
-                      cgc_fn="example_data/518_CGC_annotation_2211.xlsx",
-                      previous.studies="example_data/CGCs_to_be_considered_OAC.tsv",
-                      exclude_expr=c("Not Expressed")){
-
-  require(readxl)
+getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL,
+                         scores_fn="scores.Rdata",
+                         exclude_expr=c("Not Expressed")){
 
   if(is.null(gtex.tissue)){
     stop("Please provide tissue")
@@ -880,12 +873,12 @@ getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL, 
 
   ## Get the data we need for the definition of the sys cans
   ## Load geneInfo to get the symbols as well
-  load("example_data/geneInfoNCG5_2.Rdata")
+  geneInfo=sysSVM:::geneInfo
   geneInfoNCG5 = geneInfo %>% select(entrez, symbol) %>% unique
 
   ## Load the CGC that we will consider drivers
   cat("Getting CGC annotation", "\n")
-  cgcs = read_excel(cgc_fn, 1)
+  cgcs = sysSVM:::cgcs
   ## refine to those that will be retained
   retained_CGC = cgcs %>% subset(RET.DIS=="RET")
   retained_CGC_trans = retained_CGC %>% subset(grepl("Trans", Drivers.to.be.retained))
@@ -932,7 +925,7 @@ getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL, 
   }
 
   ## Now add in the CGC drivers the CGCs identified from previous studies
-  previous = read.delim(previous.studies, header = T, sep="\t")
+  previous = sysSVM:::previous
   ## Get only those that were not considered already
   previous = previous %>% subset(to.be.considered & !already.considered)
   ## Get the entrez for these genes
@@ -971,7 +964,7 @@ getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL, 
     cat("Expression is considered for the selection of sys cans", "\n")
     ## Load expression data (GTeX)
     cat("Loading GTeX expression data", "\n")
-    load("example_data/expressionNCG5_gtex.Rdata") ## name of data frame is gtex
+    gtex=sysSVM:::gtex
     gtex = gtex %>% select(entrez, tissue, exp_level) %>% spread(tissue, exp_level)
     ## Checkpoint
     if(!(gtex.tissue%in%colnames(gtex))){
@@ -1010,7 +1003,7 @@ getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL, 
   }
 
   ## Add false positive annotation
-  false_positive_genes <- read.table(fp_dir, header = T, sep = "\t")
+  false_positive_genes <- sysSVM:::false_positive_genes
   false_positive_genes <- false_positive_genes %>% select(entrez) %>% .$entrez
   sys_cans = sys_cans %>% mutate(NCG_FP=ifelse(entrez%in%false_positive_genes, TRUE, FALSE))
 
@@ -1035,8 +1028,8 @@ scoreGenes = function(ncg.tissue.name=NULL,
   outDir = paste0(output.dir, "/Results/")
   dir.create(outDir) ## Write results in a separate directory
 
-  load("example_data/geneInfoNCG5_2.Rdata")
-  load("example_data/cancerGenesNCG5_2.Rdata")
+  geneInfo=sysSVM:::geneInfo
+  cancerGenes=sysSVM:::cancerGenes
 
   ## Check point for NCG tissues
   ncg_tissues = cancerGenes %>% select(primary_site) %>% unique %>% .$primary_site

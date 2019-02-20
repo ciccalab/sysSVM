@@ -24,17 +24,12 @@
 #'
 #'
 
-syssvm <- function(input.file="example_data/oac_ML_input_formatted.tsv",
-                   output.dir="OAC", exclude.features=c("young", "no_ALL_muts"),
+syssvm <- function(output.dir="OAC", exclude.features=c("young", "no_ALL_muts"),
                    models=NULL,
                    scaling.factors=NULL,
                    cv=3, iters=1000, step=100, top.rank=10,
                    kernels=c("linear", "polynomial", "radial", "sigmoid"),
                    cores=2, ncg.tissue.name="esophagus", refine=TRUE) {
-
-  if(is.null(input.file) | is.null(output.dir)){
-    stop("sysSVM ERROR: Input/Output file unknown, please provide input file and output directory")
-  }
 
   trainingMode = TRUE
   if(!is.null(models) & !is.null(scaling.factors)){
@@ -43,7 +38,7 @@ syssvm <- function(input.file="example_data/oac_ML_input_formatted.tsv",
   }
 
   ## Create training and prediction sets
-  createDescribeTrainingCGC(input.file=input.file, output.dir=output.dir, exclude.features=exclude.features,
+  createDescribeTrainingCGC(output.dir=output.dir, exclude.features=exclude.features,
                             trainingMode=trainingMode, models=models, scaling.factors=scaling.factors)
 
 
