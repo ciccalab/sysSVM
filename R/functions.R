@@ -1026,7 +1026,7 @@ scoreGenes = function(ncg.tissue.name=NULL,
                       top.rank=10,
                       refine=TRUE,
                       gtex.tissue="Esophagus"){
-
+  require(e1071)
   cat("Summarising cross-validation", "\n")
   cv_stats_fn = paste0(output.dir, "/cv_stats.tsv")
   cv_stats = read.table(cv_stats_fn, header = T, sep = "\t")
