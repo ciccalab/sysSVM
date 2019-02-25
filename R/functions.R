@@ -873,6 +873,9 @@ getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL,
                          scores_fn="scores.Rdata",
                          exclude_expr=c("Not Expressed")){
 
+  require(plyr)
+  require(dplyr)
+
   if(is.null(gtex.tissue)){
     stop("Please provide tissue")
   }
