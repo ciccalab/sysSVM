@@ -873,9 +873,6 @@ getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL,
                          scores_fn="scores.Rdata",
                          exclude_expr=c("Not Expressed")){
 
-  require(plyr)
-  require(dplyr)
-
   if(is.null(gtex.tissue)){
     stop("Please provide tissue")
   }
@@ -1003,7 +1000,7 @@ getSysCansOAC = function(output.dir=NULL, working.dir = NULL, gtex.tissue=NULL,
 
       ## Add the CGCs
       d_cgcs = cohort %>% subset(sample==samples[i] & gene_type=="cgc" & !gtex_tissue_expression%in%exclude_expr & !is.na(gtex_tissue_expression))
-      d = rbind.fill(d, d_cgcs)
+      d = plyr::rbind.fill(d, d_cgcs)
 
       ## Add them to the big table
       sys_cans = rbind(sys_cans, d)
