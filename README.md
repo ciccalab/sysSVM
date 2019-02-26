@@ -8,7 +8,7 @@ Patient-specific cancer driver prediction using support vector machines and syst
 > devtools::use_data(cgcs, cancerGenes, previous, gtex, geneInfo, geneProperties_mmImputed, false_positive_genes, oac_data, internal = TRUE)
 ```
 
-### Install ### (when it goes public)
+### Install 
 
 ```r
 > install.packages("devtools")
@@ -19,5 +19,6 @@ Patient-specific cancer driver prediction using support vector machines and syst
 #### Run test data ####
 ```r
 > library(sysSVM)
+> options(stringsAsFactors = F)
 > syssvm()
 ```
