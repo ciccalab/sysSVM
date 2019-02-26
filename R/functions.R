@@ -1219,7 +1219,7 @@ scoreGenes = function(ncg.tissue.name=NULL,
   lapply(unique_predictions, class)
   ## And finally export the most frequent list (from the bigest number of iterations to approximate the true values of scores/sensitivity of the models)
   check_max = which(unique_predictions$frequency==max(unique_predictions$frequency))
-  find_iter = as.numeric(unlist(strsplit(as.character(unique_predictions$iterations[check_max], ","))))
+  find_iter = as.numeric(unlist(strsplit(as.character(unique_predictions$iterations[check_max]), ",")))
   find_iter = max(find_iter)
   file.copy(paste0(output.dir, "/Results/", find_iter, "/syscan.Rdata"), paste0(output.dir, "/syscan.Rdata"))
   file.copy(paste0(output.dir, "/Results/", find_iter, "/scores.Rdata"), paste0(output.dir, "/scores.Rdata"))
