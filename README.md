@@ -13,7 +13,7 @@ Patient-specific cancer driver prediction using support vector machines and syst
 ```r
 > install.packages("devtools")
 > library(devtools)
-> install_github("thmourikis/sysSVM")
+> install_github("ciccalab/sysSVM")
 ```
 
 #### Run test data ####
