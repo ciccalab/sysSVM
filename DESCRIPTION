@@ -3,7 +3,8 @@ Type: Package
 Title: sysSVM
 Version: 0.1.0
 Authors@R: c( person("Thanos", "Mourikis", role = c("aut", "cre"), email = "athanasios.mourikis@kcl.ac.uk"),
-              person("Damjan", "Temelkovski", role = c("ctb"), email = "damjan.temelkovski@kcl.ac.uk"))
+              person("Damjan", "Temelkovski", role = c("ctb"), email = "damjan.temelkovski@kcl.ac.uk"),
+              person("Joel", "Nulsen", role = c("ctb"), email = "joel.nulsen@kcl.ac.uk"))
 Maintainer: Thanos Mourikis <thmourikis@gmail.com>
 Description: sysSVM is an algorithm to identify genes that are similar to known cancer genes according to system-level properties of the gene and type/number of alterations in tumours of cancer samples. The algorithm uses machine learning, specifically it uses four support vector machines (SVMs) with four different kernel functions (linear, polynomial, radial, and sigmoid).
 License: TBD
