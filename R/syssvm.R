@@ -24,7 +24,7 @@
 #'
 #'
 
-syssvm <- function(output.dir="OAC", exclude.features=c("young", "no_ALL_muts"),
+syssvm <- function(output.dir="OAC", exclude.features=c("young", "no_NSI_muts"),
                    models=NULL,
                    scaling.factors=NULL,
                    cv=3, iters=1000, step=100, top.rank=10,
