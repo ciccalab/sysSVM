@@ -124,7 +124,7 @@ createDescribeTrainingCGC = function(output.dir=NULL, exclude.features=NULL, tra
   })
 
   fcols=colnames(d)[unlist(to.be.factors)]
-  fcols = fcols[!fcols%in%c("sample", "entrez", "BND", "INS", "INV")]
+  fcols = fcols[!fcols%in%c("sample", "entrez", "no_ALL_muts", "no_NSI_muts", "no_TRUNC_muts", "no_NTDam_muts", "no_GOF_muts", "BND", "INS", "INV")]
 
   cols <- which(colnames(d) %in% fcols)
   for(i in cols){
